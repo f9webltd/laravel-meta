@@ -7,6 +7,10 @@
 
 Easily render meta tags within your Laravel application, using a fluent API
 
+## Requirements
+
+PHP >= 7.2, Laravel >= 5.5.
+
 ## Installation
 
 ``` bash
