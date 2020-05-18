@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg?branch=master)](https://travis-ci.org/f9webltd/laravel-meta)
+
 # Render meta tags within your Laravel application
 
 Easily render meta taggs within your Laravel application
