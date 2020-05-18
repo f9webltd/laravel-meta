@@ -1,5 +1,7 @@
+[![Latest Stable Version](https://poser.pugx.org/f9web/laravel-meta/v)](//packagist.org/packages/f9web/laravel-meta)
 [![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg)](https://travis-ci.org/f9webltd/laravel-meta)
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
+[![License](https://poser.pugx.org/f9web/laravel-meta/license)](//packagist.org/packages/f9web/laravel-meta)
 
 # Render meta tags within your Laravel application
 
