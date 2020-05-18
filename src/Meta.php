@@ -203,11 +203,6 @@ class Meta implements Htmlable
     {
         $tags = self::$tags;
 
-        // a local method with same name as the key exists
-        if (method_exists('Meta', $tag)) {
-            return call_user_func('Meta::' . $tag);
-        }
-
         // a dedicated tag class with same name as the key exists
         $class = __NAMESPACE__ . '\\Tags\\' . ucwords($tag);
         if (class_exists($class)) {
