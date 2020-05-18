@@ -1,8 +1,9 @@
 [![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg)](https://travis-ci.org/f9webltd/laravel-meta)
+[![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
 
 # Render meta tags within your Laravel application
 
-Easily render meta taggs within your Laravel application
+Easily render meta tags within your Laravel application
 
 ## Installation
 
@@ -14,7 +15,7 @@ composer require f9web/laravel-meta
 
 The package will automatically register itself if using Laravel >= 5.5.
 
-You can optionally publish the config file with:
+You can optionally publish the config file by running:
 
 ```bash
 php artisan vendor:publish --provider="F9Web\Meta\MetaServiceProvider" --tag="config"
@@ -22,9 +23,7 @@ php artisan vendor:publish --provider="F9Web\Meta\MetaServiceProvider" --tag="co
 
 ## Documentation
 
-Basic usage instructions to follow.
-
-Use the `meta()` helper of the Meta facade
+Documentation to follow.
 
 ## Testing
 

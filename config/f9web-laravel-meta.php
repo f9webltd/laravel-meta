@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        //'<meta name="format-detection" content="telephone=no">',
+        // '<meta name="format-detection" content="telephone=no">',
         // 'robots' => 'all',
         // 'referrer' => 'no-referrer-when-downgrade',
     ],
