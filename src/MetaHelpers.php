@@ -22,6 +22,6 @@ trait MetaHelpers
     {
         self::set('shortcut icon', ($icon = $src ?? config('f9web-laravel-meta.favicon-path')));
 
-        return self::setRawTag('<link rel="icon" type="image/x-icon" href="'.$icon.'">');
+        return self::setRawTag('<link rel="icon" type="image/x-icon" href="' . $icon . '">');
     }
 }

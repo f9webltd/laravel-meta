@@ -71,7 +71,7 @@ class Meta implements Htmlable
     public static function instance(): ?self
     {
         if (self::$_instance === null) {
-            self::$_instance = new self; // new static
+            self::$_instance = new self(); // new static
         }
 
         return self::$_instance;
@@ -201,13 +201,13 @@ class Meta implements Htmlable
 
         // a local method with same name as the key exists
         if (method_exists('Meta', $tag)) {
-            return call_user_func('Meta::'.$tag);
+            return call_user_func('Meta::' . $tag);
         }
 
         // a dedicated tag class with same name as the key exists
-        $class = __NAMESPACE__.'\\Tags\\'.ucwords($tag);
+        $class = __NAMESPACE__ . '\\Tags\\' . ucwords($tag);
         if (class_exists($class)) {
-            return (new $class)->render($tag, $value, $tags);
+            return (new $class())->render($tag, $value, $tags);
         }
 
         // the key starts with "property:" or "og:" - register a property type tag

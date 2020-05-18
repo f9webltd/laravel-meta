@@ -33,6 +33,6 @@ class DescriptionTagTest extends TestCase
 
         $this->service->set('description', $content = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry');
 
-        $this->assertRenders('<meta name="description" content="'.substr($content, 0, $limit).'"');
+        $this->assertRenders('<meta name="description" content="' . substr($content, 0, $limit) . '"');
     }
 }

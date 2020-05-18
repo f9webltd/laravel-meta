@@ -31,7 +31,7 @@ class CanonicalTagTest extends TestCase
         $this->service->canonical($actual);
 
         $this->assertRenders(
-            '<link rel="canonical" href="'.$expected.'" />',
+            '<link rel="canonical" href="' . $expected . '" />',
             "Set {$actual}, Expected {$actual}"
         );
     }
