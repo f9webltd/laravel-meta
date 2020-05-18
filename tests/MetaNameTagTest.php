@@ -14,7 +14,7 @@ class MetaNameTagTest extends TestCase
     {
         $this->service->set($key, $value);
 
-        $this->assertRenders('<meta name="'.$key.'" content="'.$value.'">');
+        $this->assertRenders('<meta name="' . $key . '" content="' . $value . '">');
     }
 
     /**

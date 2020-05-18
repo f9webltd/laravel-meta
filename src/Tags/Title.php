@@ -29,7 +29,7 @@ class Title implements Tag
 
         if ($title = Arr::get($tags, 'title')) {
             if ($append = config('f9web-laravel-meta.meta-title-append')) {
-                $title .= ' - '.$append;
+                $title .= ' - ' . $append;
             }
 
             if ($limit = config('f9web-laravel-meta.title-limit')) {
