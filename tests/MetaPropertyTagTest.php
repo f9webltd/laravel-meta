@@ -37,11 +37,11 @@ class MetaPropertyTagTest extends TestCase
             ],
             [
                 ['og:title', 'Laravel Docs'],
-                '<meta property="og:title" content="Laravel Docs">'
+                '<meta property="og:title" content="Laravel Docs">',
             ],
             [
                 ['property:title', 'Laravel Documentation'],
-                '<meta property="title" content="Laravel Documentation">'
+                '<meta property="title" content="Laravel Documentation">',
             ],
         ];
     }

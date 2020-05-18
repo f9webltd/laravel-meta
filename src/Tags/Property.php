@@ -6,7 +6,6 @@ namespace F9Web\Meta\Tags;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
-
 use function str_replace;
 
 class Property implements Tag

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace F9Web\Meta\Tags;
 
+use function config;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-
-use function config;
 
 class Description implements Tag
 {
