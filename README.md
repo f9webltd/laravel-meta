@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg?branch=master)](https://travis-ci.org/f9webltd/laravel-meta)
+[![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg)](https://travis-ci.org/f9webltd/laravel-meta)
 
 # Render meta tags within your Laravel application
 
