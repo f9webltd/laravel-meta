@@ -12,10 +12,7 @@ use Illuminate\Support\Str;
 class Description implements Tag
 {
     /**
-     * @param  string  $key
-     * @param  null  $value
-     * @param  \Illuminate\Support\Collection|null  $tags
-     * @return \Illuminate\Support\HtmlString
+     * {@inheritdoc}
      */
     public function render(string $key, $value = null, Collection $tags = null): HtmlString
     {

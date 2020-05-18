@@ -7,6 +7,15 @@
 
 Easily render meta tags within your Laravel application, using a fluent API
 
+## Features
+
+* Simple API
+* Laravel `>=5.5 | 6.x | 7.x` are supported
+* Render named, property type, raw, Twitter card and OpenGraph tags
+* Render default tags on every request
+* There is no need to set meta titles for every controller method. The package can optionally guess titles based on uri segments or the current named route
+* Well documented 
+
 ## Requirements
 
 PHP >= 7.2, Laravel >= 5.5.
@@ -373,6 +382,10 @@ For instance, `/users/create` and `/public/index.php/users/create` would both be
 By editing the array of removable url strings within `f9web-laravel-meta.removable-uri-segments`, this behaviour can be controlled.
 
 The package will strip `public` and `index.php` from canonical urls automatically, as a default.
+
+## Contribution
+
+Any ideas are welcome. Feel free to submit any issues or pull requests.
 
 ## Testing
 
