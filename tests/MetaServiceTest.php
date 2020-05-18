@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace F9Web\Meta\Tests;
 
-use DMS\PHPUnitExtensions\ArraySubset\Assert;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-
 use function implode;
 
 class MetaServiceTest extends TestCase
 {
-    use ArraySubsetAsserts;
-
     /** @test */
     public function it_renders_default_tags()
     {
@@ -130,10 +125,17 @@ class MetaServiceTest extends TestCase
 
         $this->assertIsArray($tags = $this->service->tags());
 
-        Assert::assertArraySubset(['canonical' => '/users/name'], $tags);
-        Assert::assertArraySubset(['og:title' => 'og title'], $tags);
-        Assert::assertArraySubset(['description' => 'meta description'], $tags);
-        Assert::assertArraySubset(['property:custom' => 'custom'], $tags);
+        $this->assertArrayHasKey('canonical', $tags);
+        $this->assertEquals('/users/name', $tags['canonical']);
+
+        $this->assertArrayHasKey('og:title', $tags);
+        $this->assertEquals('og title', $tags['og:title']);
+
+        $this->assertArrayHasKey('description', $tags);
+        $this->assertEquals('meta description', $tags['description']);
+
+        $this->assertArrayHasKey('property:custom', $tags);
+        $this->assertEquals('custom', $tags['property:custom']);
     }
 
     /** @test */
