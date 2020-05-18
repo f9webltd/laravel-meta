@@ -1,4 +1,5 @@
 [![Latest Stable Version](https://poser.pugx.org/f9web/laravel-meta/v)](https://packagist.org/packages/f9web/laravel-meta)
+![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/f9webltd/laravel-meta)
 [![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg)](https://travis-ci.org/f9webltd/laravel-meta)
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
 [![License](https://poser.pugx.org/f9web/laravel-meta/license)](https://packagist.org/packages/f9web/laravel-meta)

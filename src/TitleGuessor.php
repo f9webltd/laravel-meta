@@ -30,14 +30,13 @@ class TitleGuessor
         $config = config('f9web-laravel-meta.title-guessor');
 
         if (! $config['enabled']) {
-            return;
+            return null;
         }
 
         if (! in_array($method = $config['method'], ['route', 'uri'])) {
             $method = 'uri';
         }
 
-        // && $this->uri !== null
         if ($method === 'uri' && $this->uri !== null) {
             return $this->getUriSegments()->map(
                 function ($segment) {

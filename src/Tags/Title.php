@@ -24,7 +24,7 @@ class Title implements Tag
             $string = sprintf('<title>%s</title>', $defaultTitle);
         }
 
-        if ($title = Arr::get($tags, 'title')) {
+        if ($title = Arr::get($tags ?? [], 'title')) {
             if ($append = config('f9web-laravel-meta.meta-title-append')) {
                 $title .= ' - ' . $append;
             }
