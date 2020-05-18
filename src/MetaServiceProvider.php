@@ -2,6 +2,7 @@
 
 namespace F9Web\Meta;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class MetaServiceProvider extends ServiceProvider
@@ -13,6 +14,10 @@ class MetaServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->mergeConfigFrom(__DIR__ . '/../config/f9web-laravel-meta.php', 'f9web-laravel-meta');
+
+        Blade::directive('meta', function ($expression) {
+            return "<?php echo meta()->render($expression); ?>";
+        });
     }
 
     public function register()

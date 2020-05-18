@@ -44,13 +44,11 @@ meta()
     ->noIndex();
 ```
 
-To output meta place the following within a Blade layout file:
+To output metadata add the following within a Blade layout file:
 
  ```php
 {!! meta()->toHtml() !!}
 ```
-
-The following HTML is generated:
 
  ```html
 <title>Buy widgets today - Meta Title Append</title>
@@ -68,6 +66,22 @@ Meta::set('title', 'Buy widgets today')
     ->set('description', 'My meta description')
     ->set('theme-color', '#fafafa')
     ->noIndex();
+```
+
+### Blade Directives
+
+Blade directives are available, as an alternative to using PHP function within templates.
+
+To render all metadata:
+
+```html
+@meta
+```
+
+Render a specific meta tag by name:
+
+```html
+@meta('title')
 ```
 
 ### Additional tag types
