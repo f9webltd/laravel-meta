@@ -46,7 +46,7 @@ return [
         |
         */
 
-        'method' => 'route',
+        'method' => 'uri',
     ],
 
     /*

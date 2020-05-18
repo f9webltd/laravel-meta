@@ -135,6 +135,10 @@ class Meta implements Htmlable
      */
     public function tags(): array
     {
+        if (! ($tags = self::$rawTags)) {
+            self::$rawTags = new Collection();
+        }
+
         return self::$tags->concat(self::$rawTags)->toArray();
     }
 
