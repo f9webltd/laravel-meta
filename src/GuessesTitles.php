@@ -2,10 +2,9 @@
 
 namespace F9Web\Meta;
 
+use function config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-
-use function config;
 use function optional;
 
 trait GuessesTitles

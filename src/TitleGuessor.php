@@ -2,11 +2,10 @@
 
 namespace F9Web\Meta;
 
-use Illuminate\Support\Collection;
-
 use function collect;
 use function config;
 use function explode;
+use Illuminate\Support\Collection;
 use function in_array;
 use function parse_url;
 use function str_replace;
@@ -30,11 +29,11 @@ class TitleGuessor
     {
         $config = config('f9web-laravel-meta.title-guessor');
 
-        if (!$config['enabled']) {
-            return null;
+        if (! $config['enabled']) {
+            return;
         }
 
-        if (!in_array($method = $config['method'], ['route', 'uri'])) {
+        if (! in_array($method = $config['method'], ['route', 'uri'])) {
             $method = 'uri';
         }
 
@@ -52,8 +51,6 @@ class TitleGuessor
 
             return ucwords(str_replace('.', ' - ', $routeName));
         }
-
-        return null;
     }
 
     /**

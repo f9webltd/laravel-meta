@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace F9Web\Meta;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
-use F9Web\Meta\Tags\{Name, Property};
-use Illuminate\Support\Arr;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Str;
-
-use PHPUnit\TextUI\Configuration\Logging\TestDox\Html;
-
 use function array_map;
 use function call_user_func;
 use function class_exists;
 use function config;
+use F9Web\Meta\Tags\Name;
+use F9Web\Meta\Tags\Property;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 use function implode;
 use function is_int;
 use function method_exists;
@@ -58,7 +56,7 @@ class Meta implements Htmlable
      */
     public static function setRawTag(string $value): self
     {
-        if (!($tags = self::$rawTags)) {
+        if (! ($tags = self::$rawTags)) {
             self::$rawTags = new Collection();
         }
 
@@ -110,7 +108,7 @@ class Meta implements Htmlable
     public static function fromArray(array $items = []): self
     {
         foreach ($items as $key => $value) {
-            self::set($key, (string)$value);
+            self::set($key, (string) $value);
         }
 
         return self::instance();
@@ -123,7 +121,7 @@ class Meta implements Htmlable
      */
     public static function set(string $key, string $value): self
     {
-        if (!($tags = self::$tags)) {
+        if (! ($tags = self::$tags)) {
             self::$tags = new Collection();
         }
 
@@ -155,7 +153,7 @@ class Meta implements Htmlable
     public static function render(?string $tag = null): string
     {
         // ensure a meta title is always set
-        if (!Arr::get(self::$tags, 'title')) {
+        if (! Arr::get(self::$tags, 'title')) {
             self::setDefaultTitle();
         }
 

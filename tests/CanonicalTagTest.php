@@ -24,7 +24,7 @@ class CanonicalTagTest extends TestCase
             'f9web-laravel-meta.removable-uri-segments' => [
                 '/public',
                 '/index.php',
-                '/exclude-me'
+                '/exclude-me',
             ],
         ]);
 
