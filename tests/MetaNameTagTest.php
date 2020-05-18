@@ -40,5 +40,3 @@ class MetaNameTagTest extends TestCase
         ];
     }
 }
-
-// phpunit --filter=MetaNameTagTest

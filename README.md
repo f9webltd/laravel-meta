@@ -1,8 +1,8 @@
-[![Latest Stable Version](https://poser.pugx.org/f9web/laravel-meta/v)](https://packagist.org/packages/f9web/laravel-meta)
+[![Latest Stable Version](https://poser.pugx.org/f9webltd/laravel-meta/v)](https://packagist.org/packages/f9webltd/laravel-meta)
 ![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/f9webltd/laravel-meta)
 [![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg)](https://travis-ci.org/f9webltd/laravel-meta)
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
-[![License](https://poser.pugx.org/f9web/laravel-meta/license)](https://packagist.org/packages/f9web/laravel-meta)
+[![License](https://poser.pugx.org/f9webltd/laravel-meta/license)](https://packagist.org/packages/f9webltd/laravel-meta)
 
 # Render meta tags within your Laravel application
 
@@ -24,7 +24,7 @@ PHP >= 7.2, Laravel >= 5.5.
 ## Installation
 
 ``` bash
-composer require f9web/laravel-meta
+composer require f9webltd/laravel-meta
 ```
 
 The package will automatically register itself if using Laravel >= 5.5.
@@ -54,13 +54,11 @@ meta()
     ->noIndex();
 ```
 
-To output meta place the following within a Blade layout file:
+To output metadata add the following within a Blade layout file:
 
  ```php
 {!! meta()->toHtml() !!}
 ```
-
-The following HTML is generated:
 
  ```html
 <title>Buy widgets today - Meta Title Append</title>
@@ -78,6 +76,22 @@ Meta::set('title', 'Buy widgets today')
     ->set('description', 'My meta description')
     ->set('theme-color', '#fafafa')
     ->noIndex();
+```
+
+### Blade Directives
+
+Blade directives are available, as an alternative to using PHP function within templates.
+
+To render all metadata:
+
+```html
+@meta
+```
+
+Render a specific meta tag by name:
+
+```html
+@meta('title')
 ```
 
 ### Additional tag types
