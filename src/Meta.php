@@ -157,7 +157,7 @@ class Meta implements Htmlable
     public static function render(?string $tag = null): string
     {
         // ensure a meta title is always set
-        if (! Arr::get(self::$tags, 'title')) {
+        if (! Arr::get(self::$tags ?? [], 'title')) {
             self::setDefaultTitle();
         }
 
