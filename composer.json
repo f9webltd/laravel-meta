@@ -1,12 +1,12 @@
 {
-  "name": "f9web/laravel-meta",
+  "name": "f9webltd/laravel-meta",
   "description": "Render meta tags in your Laravel application",
   "keywords": [
     "laravel",
     "laravel meta",
     "meta"
   ],
-  "homepage": "https://github.com/f9web/laravel-meta",
+  "homepage": "https://github.com/f9webltd/laravel-meta",
   "license": "MIT",
   "authors": [
     {
