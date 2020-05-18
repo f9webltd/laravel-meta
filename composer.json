@@ -1,0 +1,60 @@
+{
+  "name": "f9web/laravel-meta",
+  "description": "Render meta tags in your Laravel application",
+  "keywords": [
+    "laravel",
+    "laravel meta",
+    "meta"
+  ],
+  "homepage": "https://github.com/f9web/laravel-meta",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rob Allport",
+      "email": "rob@f9web.co.uk",
+      "homepage": "https://www.f9web.co.uk",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "illuminate/config": "^5.0|^6.0|^7.0",
+    "illuminate/support": "^5.0|^6.0|^7.0"
+  },
+  "require-dev": {
+    "dms/phpunit-arraysubset-asserts": "^0.2.0",
+    "orchestra/testbench": "^5.0",
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "F9Web\\Meta\\": "src"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "F9Web\\Meta\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "F9Web\\Meta\\MetaServiceProvider"
+      ],
+      "aliases": {
+        "Meta": "F9Web\\Meta\\MetaFacade"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
