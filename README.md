@@ -78,7 +78,7 @@ To render all metadata:
 @meta
 ```
 
-Render a specific metatag by name.:
+Render a specific meta tag by name:
 
 ```html
 @meta('title')

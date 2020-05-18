@@ -20,18 +20,20 @@ class CanonicalTagTest extends TestCase
      */
     public function it_renders_the_expected_adjusted_tag_url(string $actual, string $expected)
     {
-        $this->app['config']->set([
-            'f9web-laravel-meta.removable-uri-segments' => [
-                '/public',
-                '/index.php',
-                '/exclude-me',
-            ],
-        ]);
+        $this->app['config']->set(
+            [
+                'f9web-laravel-meta.removable-uri-segments' => [
+                    '/public',
+                    '/index.php',
+                    '/exclude-me',
+                ],
+            ]
+        );
 
         $this->service->canonical($actual);
 
         $this->assertRenders(
-            '<link rel="canonical" href="' . $expected . '" />',
+            '<link rel="canonical" href="'.$expected.'" />',
             "Set {$actual}, Expected {$actual}"
         );
     }
@@ -55,5 +57,3 @@ class CanonicalTagTest extends TestCase
         ];
     }
 }
-
-// phpunit --filter=CanonicalTagTest
