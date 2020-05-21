@@ -2,6 +2,7 @@
 
 namespace F9Web\Meta;
 
+use F9Web\Meta\Exceptions\GuessorException;
 use function collect;
 use function config;
 use function explode;
@@ -14,7 +15,7 @@ use function ucwords;
 class TitleGuessor
 {
     /** @var string */
-    protected $method = 'uri';
+    public $method = 'uri';
 
     /** @var string */
     protected $uri;
@@ -33,23 +34,39 @@ class TitleGuessor
             return null;
         }
 
-        if (! in_array($method = $config['method'], ['route', 'uri'])) {
-            $method = 'uri';
+        $this->setMethod($config['method']);
+
+        if (! in_array($method = $this->getMethod(), ['route', 'uri'])) {
+            throw new GuessorException();
         }
 
         if ($method === 'uri' && $this->uri !== null) {
-            return $this->getUriSegments()->map(
-                function ($segment) {
-                    return ucwords($segment);
-                }
-            )->implode(' - ');
+            return $this->getFromUri();
         }
 
-        if ($method === 'route' && ($routeName = $this->route)) {
-            $routeName = str_replace('.index', '', $routeName);
+        return $this->getFromRoute();
+    }
 
-            return ucwords(str_replace('.', ' - ', $routeName));
-        }
+    /**
+     * @return string|null
+     */
+    private function getFromRoute(): ?string
+    {
+        $routeName = str_replace('.index', '', $this->route ?? '');
+
+        return ucwords(str_replace('.', ' - ', $routeName));
+    }
+
+    /**
+     * @return string|null
+     */
+    private function getFromUri(): ?string
+    {
+        return $this->getUriSegments()->map(
+            function ($segment) {
+                return ucwords($segment);
+            }
+        )->implode(' - ');
     }
 
     /**
@@ -83,6 +100,25 @@ class TitleGuessor
     }
 
     /**
+     * @return string|null
+     */
+    public function getRoute(): ?string
+    {
+        return $this->route;
+    }
+
+    /**
+     * @param  string|null  $method
+     * @return $this
+     */
+    public function setMethod(?string $method = null): self
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getMethod(): string
@@ -90,6 +126,9 @@ class TitleGuessor
         return $this->method;
     }
 
+    /**
+     * @return $this
+     */
     public function reset(): self
     {
         $this->method = 'uri';

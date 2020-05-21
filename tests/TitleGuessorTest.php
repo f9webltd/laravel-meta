@@ -4,10 +4,42 @@ declare(strict_types=1);
 
 namespace F9Web\Meta\Tests;
 
+use F9Web\Meta\Exceptions\GuessorException;
 use F9Web\Meta\TitleGuessor;
 
 class TitleGuessorTest extends TestCase
 {
+    public function tearDown(): void
+    {
+        $this->app['config']->set(
+            [
+                'f9web-laravel-meta' => [
+                    'title-guessor' => [
+                        'enabled' => true,
+                        'method'  => 'uri',
+                    ],
+                ],
+            ]
+        );
+
+        parent::tearDown();
+    }
+
+    /** @test */
+    public function it_reset_class_properties()
+    {
+        $service = new TitleGuessor();
+        $service->withRoute('users.create');
+
+        $this->assertEquals('uri', $service->getMethod());
+        $this->assertEquals('users.create', $service->getRoute());
+
+        $service->reset();
+
+        $this->assertEquals('uri', $service->getMethod());
+        $this->assertNull($service->getRoute());
+    }
+
     /** @test */
     public function it_returns_null_when_disabled()
     {
@@ -16,7 +48,6 @@ class TitleGuessorTest extends TestCase
                 'f9web-laravel-meta' => [
                     'title-guessor' => [
                         'enabled' => false,
-                        'method'  => 'route',
                     ],
                 ],
             ]
@@ -26,25 +57,17 @@ class TitleGuessorTest extends TestCase
     }
 
     /** @test */
-    public function it_determines_the_correct_guessing_method()
+    public function it_throws_an_exception__when_an_invalid_guessing_method_is_provided()
     {
-        $service = (new TitleGuessor());
+        $this->expectException(GuessorException::class);
 
         $this->app['config']->set(
             [
-                'f9web-laravel-meta.title-guessor.method' => 'uri',
+                'f9web-laravel-meta.title-guessor.method'  => 'not-route-or-uri',
             ]
         );
 
-        $this->assertEquals('uri', $service->getMethod());
-
-        $this->app['config']->set(
-            [
-                'f9web-laravel-meta.title-guessor.method' => 'something-invalid',
-            ]
-        );
-
-        $this->assertEquals('uri', $service->getMethod());
+        (new TitleGuessor())->render();
     }
 
     /**
@@ -91,6 +114,8 @@ class TitleGuessorTest extends TestCase
     /**
      * @test
      * @dataProvider  namedRoutesProvider
+     * @param  string  $title
+     * @param  string  $route
      */
     public function it_determines_the_title_using_named_routes(string $title, string $route)
     {

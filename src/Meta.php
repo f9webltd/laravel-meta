@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace F9Web\Meta;
 
 use function array_map;
-use function call_user_func;
 use function class_exists;
 use function config;
 use F9Web\Meta\Tags\Name;
@@ -17,7 +16,6 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use function implode;
 use function is_int;
-use function method_exists;
 use function ucwords;
 
 class Meta implements Htmlable
@@ -56,7 +54,7 @@ class Meta implements Htmlable
      */
     public static function setRawTag(string $value): self
     {
-        if (! ($tags = self::$rawTags)) {
+        if (self::$rawTags === []) {
             self::$rawTags = new Collection();
         }
 
@@ -108,7 +106,7 @@ class Meta implements Htmlable
     public static function fromArray(array $items = []): self
     {
         foreach ($items as $key => $value) {
-            self::set($key, (string) $value);
+            self::set($key, (string)$value);
         }
 
         return self::instance();
@@ -121,7 +119,7 @@ class Meta implements Htmlable
      */
     public static function set(string $key, string $value): self
     {
-        if (! ($tags = self::$tags)) {
+        if (self::$tags === null) {
             self::$tags = new Collection();
         }
 
@@ -135,10 +133,6 @@ class Meta implements Htmlable
      */
     public function tags(): array
     {
-        if (! ($tags = self::$rawTags)) {
-            self::$rawTags = new Collection();
-        }
-
         return self::$tags->concat(self::$rawTags)->toArray();
     }
 
@@ -157,18 +151,16 @@ class Meta implements Htmlable
     public static function render(?string $tag = null): string
     {
         // ensure a meta title is always set
-        if (! Arr::get(self::$tags ?? [], 'title')) {
+        if (!Arr::get(self::$tags ?? [], 'title')) {
             self::setDefaultTitle();
         }
 
-        // register default tags for every request
-        if ($defaults = config('f9web-laravel-meta.defaults')) {
-            foreach ($defaults as $key => $value) {
-                if (is_int($key)) {
-                    self::setRawTag($value);
-                } else {
-                    self::set($key, $value);
-                }
+        // register default tags on each request
+        foreach (config('f9web-laravel-meta.defaults') as $key => $value) {
+            if (is_int($key)) {
+                self::setRawTag($value);
+            } else {
+                self::set($key, $value);
             }
         }
 
@@ -204,7 +196,7 @@ class Meta implements Htmlable
         $tags = self::$tags;
 
         // a dedicated tag class with same name as the key exists
-        $class = __NAMESPACE__ . '\\Tags\\' . ucwords($tag);
+        $class = __NAMESPACE__.'\\Tags\\'.ucwords($tag);
         if (class_exists($class)) {
             return (new $class())->render($tag, $value, $tags);
         }
@@ -243,9 +235,9 @@ class Meta implements Htmlable
     /**
      * @param $function
      * @param $args
-     * @return \F9Web\Meta\Meta
+     * @return \F9Web\Meta\Meta|null
      */
-    public function __call($function, $args): self
+    public function __call($function, $args): ?self
     {
         if ($function === 'raw') {
             return self::setRawTag($args[0]);

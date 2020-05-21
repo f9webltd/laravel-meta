@@ -44,18 +44,18 @@ class MetaTitleTagTest extends TestCase
     /** @test */
     public function it_renders_a_limited_title_length()
     {
-        // given the title is not limited to 10 characters ...
+        // given the title is limited to 10 characters ...
         $this->app['config']->set(
             [
-                'f9web-laravel-meta.title-limit'       => 10,
+                'f9web-laravel-meta.title-limit'       => 5,
                 'f9web-laravel-meta.meta-title-append' => null,
             ]
         );
 
         $this->service->set('title', 'abcdefghij');
 
-        // the full title should be present
-        $this->assertRenders('<title>abcdefghij</title>');
+        // the limited title should be present
+        $this->assertRenders('<title>abcde</title>');
     }
 
     /** @test */
@@ -74,9 +74,8 @@ class MetaTitleTagTest extends TestCase
     }
 
     /** @test */
-    public function it_renders_no_title_when_one_is_not_set_and_no_default_exists()
+    public function it_renders_an_empty_title_when_one_is_not_set_and_no_default_exists()
     {
-        // given the title is not set and a default exists
         $this->app['config']->set(
             [
                 'f9web-laravel-meta.fallback-meta-title' => null,
@@ -84,7 +83,6 @@ class MetaTitleTagTest extends TestCase
             ]
         );
 
-        // the full title should be present
         $this->assertRenders('<title></title>');
     }
 }

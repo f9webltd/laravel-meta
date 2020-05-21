@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace F9Web\Meta\Tests;
 
+use Illuminate\Support\Collection;
+
 use function implode;
 
 class MetaServiceTest extends TestCase
@@ -16,6 +18,7 @@ class MetaServiceTest extends TestCase
                 'f9web-laravel-meta.defaults' => [
                     'robots' => 'all',
                     'referrer' => 'no-referrer-when-downgrade',
+                    '<meta name="format-detection" content="telephone=no">',
                 ],
             ]
         );
@@ -164,5 +167,52 @@ class MetaServiceTest extends TestCase
             'canonical' => '/users/create',
             'description' => 'meta description',
         ], $this->service->tags());
+    }
+
+    /** @test */
+    public function it_can_render_tags_using_the_to_html_method()
+    {
+        $this->service->set('canonical', '/users');
+
+        $this->assertStringContainsString('<link rel="canonical" href="/users" />', $this->service->toHtml());
+    }
+
+    /** @test */
+    public function it_can_determine_tags_dynamically()
+    {
+        $this->service->set('canonical', '/users');
+
+        $this->assertEquals('/users', $this->service->canonical);
+    }
+
+    /** @test */
+    public function it_get_all_tags_when_calling_with_parameters()
+    {
+        $this->service->set('canonical', '/users');
+        $this->service->set('title', 'meta title');
+
+        $this->assertInstanceOf(Collection::class, $this->service->get());
+    }
+
+    /** @test */
+    public function it_get_all_tags_when_no_standard_tags_have_been_set()
+    {
+        $this->service->setRawTag('<tag />');
+
+        $this->assertNotEmpty($this->service->tags());
+    }
+
+    /** @test */
+    public function it_gets_all_tags_when_no_raw_tags_have_been_set()
+    {
+        $this->service->set('canonical', '/users');
+
+        $this->assertTrue(isset($this->service->tags()['canonical']));
+    }
+
+    /** @test */
+    public function it_gets_all_tags_when_none_are_present()
+    {
+        $this->assertIsArray($this->service->tags());
     }
 }

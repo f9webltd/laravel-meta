@@ -21,7 +21,7 @@ trait GuessesTitles
             ->withRoute(optional(Route::current())->getName())
             ->render();
 
-        if ($title === null && ($fallback = config('f9web-laravel-meta.fallback-meta-title'))) {
+        if ($title === '' && ($fallback = config('f9web-laravel-meta.fallback-meta-title'))) {
             return $fallback;
         }
 
