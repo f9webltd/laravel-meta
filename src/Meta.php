@@ -196,7 +196,7 @@ class Meta implements Htmlable
         $tags = self::$tags;
 
         // a dedicated tag class with same name as the key exists
-        $class = __NAMESPACE__.'\\Tags\\'.ucwords($tag);
+        $class = __NAMESPACE__ . '\\Tags\\' . ucwords($tag);
         if (class_exists($class)) {
             return (new $class())->render($tag, $value, $tags);
         }
