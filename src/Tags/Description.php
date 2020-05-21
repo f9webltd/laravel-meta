@@ -8,6 +8,7 @@ use function config;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+use function sprintf;
 
 class Description implements Tag
 {
@@ -16,10 +17,12 @@ class Description implements Tag
      */
     public function render(string $key, $value = null, Collection $tags = null): HtmlString
     {
-        if ($limit = config('f9web-laravel-meta.description-limit')) {
-            $value = Str::limit($value, $limit, null);
-        }
-
-        return new HtmlString("<meta name=\"{$key}\" content=\"{$value}\">");
+        return new HtmlString(
+            sprintf(
+                '<meta name="%s" content="%s">',
+                $key,
+                Str::limit($value, config('f9web-laravel-meta.description-limit') ?? 9999, null)
+            )
+        );
     }
 }

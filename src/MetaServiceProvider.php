@@ -16,7 +16,7 @@ class MetaServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/f9web-laravel-meta.php', 'f9web-laravel-meta');
 
         Blade::directive('meta', function ($expression) {
-            return "<?php echo meta()->render($expression); ?>";
+            return sprintf('<?php echo meta()->render(%s); ?>', $expression);
         });
     }
 
