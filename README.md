@@ -1,5 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/f9webltd/laravel-meta/v)](https://packagist.org/packages/f9webltd/laravel-meta)
-![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/f9webltd/laravel-meta)
+[![Scrutinizer coverage (GitHub/BitBucket)](https://img.shields.io/scrutinizer/coverage/g/f9webltd/laravel-meta)]()
+[![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/f9webltd/laravel-meta)]()
 [![Build Status](https://travis-ci.org/f9webltd/laravel-meta.svg)](https://travis-ci.org/f9webltd/laravel-meta)
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
 [![License](https://poser.pugx.org/f9webltd/laravel-meta/license)](https://packagist.org/packages/f9webltd/laravel-meta)
@@ -15,7 +16,7 @@ Easily render meta tags within your Laravel application, using a fluent API
 * Render named, property type, raw, Twitter card and OpenGraph tags
 * Render default tags on every request
 * There is no need to set meta titles for every controller method. The package can optionally guess titles based on uri segments or the current named route
-* Well documented 
+* Well documented
 
 ## Requirements
 
@@ -338,7 +339,7 @@ The package ensures a meta tag is always present. Omitting a title will force th
 
 Two methods available, `route` (based on the current named route) and `uri` (the default, based on the raw uri segments). 
 
-The guessing method is configurable via the `f9web-laravel-meta.title-guessor.method` config value. 
+The guessing method is configurable via the `f9web-laravel-meta.title-guessor.method` configuration value. 
 
 Using the `uri` method, the meta title for `uri` `/orders/create` would be "Orders - Create".
 
