@@ -28,7 +28,7 @@ abstract class TestCase extends OrchestraTestCase
             [
                 'f9web-laravel-meta' => [
                     'defaults'               => [],
-                    'meta-title-append'      => null,
+                    'meta-title-append'      => 'Meta Title Append',
                     'title-guessor'          => [
                         'enabled' => true,
                         'method'  => 'route',
@@ -38,7 +38,7 @@ abstract class TestCase extends OrchestraTestCase
                         '/index.php',
                     ],
                     'fallback-meta-title'    => null,
-                    'favicon-path'           => asset('favicon.ico'),
+                    'favicon-path'           => '/favicon.ico',
                     'title-limit'            => 60,
                     'description-limit'      => null,
                 ],
