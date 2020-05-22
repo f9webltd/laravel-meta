@@ -9,14 +9,18 @@ return [
     |
     | The following tags are set by default on every request. Default tags can
     | can be set using key / value or string format. The latter will default
-    | to setting a raw meta tag.
+    | to setting a raw meta tag. Raw tags can be set by omitting the value
+    | segment of the array.
     |
     */
 
     'defaults' => [
-        // '<meta name="format-detection" content="telephone=no">',
-        // 'robots' => 'all',
+        // '<meta charset="utf-8">',
+        // 'robots' => 'noindex nofollow',
+        // 'viewport' => 'width=device-width, initial-scale=1, shrink-to-fit=no',
         // 'referrer' => 'no-referrer-when-downgrade',
+        // 'twitter:site' => '@user',
+        // 'og:url' => 'http://site.co.uk/posts/hello.html',
     ],
 
     'title-guessor' => [
@@ -74,7 +78,7 @@ return [
     |
     */
 
-    'meta-title-append' => 'Meta Title Append',
+    'meta-title-append' => env('APP_NAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +101,7 @@ return [
     |
     */
 
-    'favicon-path' => asset('favicon.ico'),
+    'favicon-path' => '/favicon.ico',
 
     /*
     |--------------------------------------------------------------------------
