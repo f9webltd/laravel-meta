@@ -12,7 +12,7 @@ Easily render meta tags within your Laravel application, using a fluent API
 ## Features
 
 * Simple API
-* Laravel `>=5.5 | 6.x | 7.x` are supported
+* Laravel `>=5.8 | 6.x | 7.x` are supported
 * Render named, property type, raw, Twitter card and OpenGraph tags
 * Render default tags on every request
 * There is no need to set meta titles for every controller method. The package can optionally guess titles based on uri segments or the current named route
@@ -20,7 +20,7 @@ Easily render meta tags within your Laravel application, using a fluent API
 
 ## Requirements
 
-PHP >= 7.2, Laravel >= 5.5.
+PHP >= 7.2, Laravel >= 5.8.
 
 ## Installation
 
@@ -28,7 +28,7 @@ PHP >= 7.2, Laravel >= 5.5.
 composer require f9webltd/laravel-meta
 ```
 
-The package will automatically register itself if using Laravel >= 5.5.
+The package will automatically register itself.
 
 Optionally publish the configuration file by running:
 
