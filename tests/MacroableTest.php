@@ -49,15 +49,15 @@ class MacroableTest extends TestCase
             $page = $data['page'] ?? 1;
 
             if ($page > 1) {
-                Meta::setRawTag('<link rel="prev" href="'.$data['prev'].'" />');
+                Meta::setRawTag('<link rel="prev" href="' . $data['prev'] . '" />');
             }
 
             if (!empty($data['next'])) {
-                return Meta::setRawTag('<link rel="next" href="'.$data['next'].'" />');
+                return Meta::setRawTag('<link rel="next" href="' . $data['next'] . '" />');
             }
 
             return Meta::instance();
-         });
+        });
 
         $this->service->setPaginationTags([
             'page' => 7,

@@ -14,12 +14,12 @@ class MetaServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                __DIR__.'/../config/f9web-laravel-meta.php' => config_path('f9web-laravel-meta.php'),
+                __DIR__ . '/../config/f9web-laravel-meta.php' => config_path('f9web-laravel-meta.php'),
             ],
             'config'
         );
 
-        $this->mergeConfigFrom(__DIR__.'/../config/f9web-laravel-meta.php', 'f9web-laravel-meta');
+        $this->mergeConfigFrom(__DIR__ . '/../config/f9web-laravel-meta.php', 'f9web-laravel-meta');
 
         $this->registerBladeDirectives();
 
