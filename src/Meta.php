@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 
 use function array_map;
 use function class_exists;
@@ -24,6 +25,9 @@ class Meta implements Htmlable
 {
     use MetaHelpers;
     use GuessesTitles;
+    use Macroable {
+        __call as macroCall;
+    }
 
     /** @var \Illuminate\Support\Collection|null */
     protected static $tags = null;
@@ -97,6 +101,21 @@ class Meta implements Htmlable
     {
         self::$tags = new Collection();
         self::$rawTags = new Collection();
+
+        return self::instance();
+    }
+
+    /**
+     * A helper method used within a testing context only.
+     * To reset tags use the purge() method.
+     *
+     * @return \F9Web\Meta\Meta
+     * @see Meta::purge() To reset all tags
+     */
+    public static function resetTags(): self
+    {
+        self::$tags = null;
+        self::$rawTags = [];
 
         return self::instance();
     }
@@ -257,16 +276,20 @@ class Meta implements Htmlable
     }
 
     /**
-     * @param $function
-     * @param $args
+     * @param $method
+     * @param $parameters
      * @return \F9Web\Meta\Meta|null
      */
-    public function __call($function, $args): ?self
+    public function __call($method, $parameters): ?self
     {
-        if ($function === 'raw') {
-            return self::setRawTag($args[0]);
+        if (static::hasMacro($method)) {
+            return $this->macroCall($method, $parameters);
         }
 
-        return self::set($function, $args[0]);
+        if ($method === 'raw') {
+            return self::setRawTag($parameters[0]);
+        }
+
+        return self::set($method, $parameters[0]);
     }
 }

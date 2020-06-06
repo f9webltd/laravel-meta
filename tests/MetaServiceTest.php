@@ -16,7 +16,7 @@ class MetaServiceTest extends TestCase
         $this->app['config']->set(
             [
                 'f9web-laravel-meta.defaults' => [
-                    'robots' => 'all',
+                    'robots'   => 'all',
                     'referrer' => 'no-referrer-when-downgrade',
                     '<meta name="format-detection" content="telephone=no">',
                 ],
@@ -77,7 +77,10 @@ class MetaServiceTest extends TestCase
         $this->assertStringContainsString('<meta name="shortcut icon" content="/icon.png">', $html);
         $this->assertStringContainsString('<link rel="icon" type="image/x-icon" href="/icon.png">', $html);
         $this->assertStringContainsString('<meta name="robots" content="noindex nofollow">', $html);
-        $this->assertStringContainsString('<link rel="manifest" href="manifest.json" crossOrigin="use-credentials">', $html);
+        $this->assertStringContainsString(
+            '<link rel="manifest" href="manifest.json" crossOrigin="use-credentials">',
+            $html
+        );
         $this->assertStringContainsString(
             '<link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP">',
             $html
@@ -163,10 +166,13 @@ class MetaServiceTest extends TestCase
             ->canonical('/users/create')
             ->description('meta description');
 
-        $this->assertEquals([
-            'canonical' => '/users/create',
-            'description' => 'meta description',
-        ], $this->service->tags());
+        $this->assertEquals(
+            [
+                'canonical'   => '/users/create',
+                'description' => 'meta description',
+            ],
+            $this->service->tags()
+        );
     }
 
     /** @test */
@@ -214,5 +220,42 @@ class MetaServiceTest extends TestCase
     public function it_gets_all_tags_when_none_are_present()
     {
         $this->assertIsArray($this->service->tags());
+    }
+
+    /** @test */
+    public function it_handles_calls_to_tags_when_no_tags_are_set()
+    {
+        $this->service->resetTags();
+
+        $this->assertCount(0, $this->service->tags());
+
+        $this->service->set('a', 'b');
+
+        $this->assertCount(1, $this->service->tags());
+    }
+
+    /** @test */
+    public function it_handles_calls_to_tags_when_no_raw_tags_are_set()
+    {
+        $this->service->resetTags();
+
+        $this->assertCount(0, $this->service->tags());
+
+        $this->service->setRawTag('<link rel="something" href="/users" />');
+
+        $this->assertCount(1, $this->service->tags());
+    }
+
+    /**
+     * @test
+     * @group a
+     */
+    public function it_handles_calls_to_set_tags_when_no_tags_are_set()
+    {
+        $this->service->resetTags();
+
+        $this->service->set('a', 'b');
+
+        $this->assertCount(1, $this->service->tags());
     }
 }
