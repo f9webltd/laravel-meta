@@ -31,7 +31,7 @@ class Meta implements Htmlable
     /** @var \Illuminate\Support\Collection|null */
     protected static $tags = null;
 
-    /** @var \Illuminate\Support\Collection|null */
+    /** @var array|\Illuminate\Support\Collection|null */
     protected static $rawTags = [];
 
     /** @var null|Meta */
@@ -209,9 +209,7 @@ class Meta implements Htmlable
 
         // render a specific tag if provided
         if (null !== $tag && isset($tags[$tag])) {
-            $content = self::getContent($tags[$tag] ?? '', $tag);
-
-            return $content->toHtml();
+            return (self::getContent($tags[$tag] ?? '', $tag))->toHtml();
         }
 
         return implode(
