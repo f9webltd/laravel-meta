@@ -14,10 +14,12 @@ Easily render meta tags within your Laravel application, using a fluent API
 * Simple API
 * Laravel `>=5.8 | 6.x | 7.x` supported
 * Render named, property type, raw, Twitter card and OpenGraph tags
-* Optionally, render default tags on every request
-* Conditionally set tags
-* There is no need to set meta titles for every controller method. The package can optionally guess titles based on uri segments or the current named route
+* [Optionally, render default tags on every request](#default-tags)
+* [Conditionally set tags](#conditionally-setting-tags)
+* [Macroable](#macroable-support)
+* There is no need to set meta titles for every controller method. The package can [optionally guess titles based on uri](#meta-title) segments or the current named route
 * Well documented
+* Tested, with 100% code coverage
 
 ## Requirements
 
@@ -362,6 +364,65 @@ meta()
     ->set('description', 'meta description')
     ->set('canonical', '/users/me');
 ```
+
+### Macroable Support
+
+The package implements Laravel's `Macroable` trait, meaning additional methods can be added the main Meta service class at run time. For example, [Laravel's collection class is macroable](For furtherinformatioin see the following samples
+).
+
+The `noIndex` and `favIcon` helpers are defined as macros within the [package service provider](src/MetaServiceProvider.php).
+
+Sample macro to set arbitrary defaults tags for SEO:
+
+```php
+// within a service provider
+Meta::macro('seoDefaults', function () {
+    return Meta::favIcon()
+        ->set('title', $title = 'Widgets, Best Widgets')
+        ->set('og:title', $title)
+        ->set('description', $description = 'Buy the best widgets from Acme Co.')
+        ->set('og:description', $description)
+        ->fromarray([
+            'twitter:card' => 'summary',
+            'twitter:site' => '@roballport',
+        ]);
+});
+```
+
+To call the newly defined macro:
+
+```php
+meta()->seoDefaults();
+```
+
+Macros can also accept arguments.
+
+```php
+Meta::macro('setPaginationTags', function (array $data) {
+    $page = $data['page'] ?? 1;
+
+    if ($page > 1) {
+        Meta::setRawTag('<link rel="prev" href="' . $data['prev'] . '" />');
+    }
+
+    if (!empty($data['next'])) {
+        return Meta::setRawTag('<link rel="next" href="' . $data['next'] . '" />');
+    }
+
+    return Meta::instance();
+});
+```
+
+```php
+meta()->setPaginationTags([
+    'page' => 7,
+    'next' => '/users/page/8',
+    'prev' => '/users/page/6',
+]);
+```
+
+To allow for fluent method calls ensure the macro returns an instance of the class.
+
 
 ### Special tags
 
