@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace F9Web\Meta;
 
-use function array_map;
-use function class_exists;
-use function config;
+use Closure;
 use F9Web\Meta\Tags\Name;
 use F9Web\Meta\Tags\Property;
 use Illuminate\Contracts\Support\Htmlable;
@@ -14,6 +12,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+
+use function array_map;
+use function class_exists;
+use function config;
 use function implode;
 use function is_int;
 use function ucwords;
@@ -129,10 +131,31 @@ class Meta implements Htmlable
     }
 
     /**
+     * @param  bool  $condition
+     * @param  \Closure  $callback
+     * @return $this
+     */
+    public static function when(bool $condition, Closure $callback): self
+    {
+        $instance = self::instance();
+
+        return tap(
+            $instance,
+            function ($instance) use ($callback, $condition) {
+                return $condition ? $callback($instance) : $instance;
+            }
+        );
+    }
+
+    /**
      * @return array
      */
     public function tags(): array
     {
+        if (null === self::$tags) {
+            self::$tags = new Collection();
+        }
+
         return self::$tags->concat(self::$rawTags)->toArray();
     }
 
@@ -196,7 +219,8 @@ class Meta implements Htmlable
         $tags = self::$tags;
 
         // a dedicated tag class with same name as the key exists
-        $class = __NAMESPACE__ . '\\Tags\\' . ucwords($tag);
+        $class = __NAMESPACE__.'\\Tags\\'.ucwords($tag);
+
         if (class_exists($class)) {
             return (new $class())->render($tag, $value, $tags);
         }

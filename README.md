@@ -12,9 +12,10 @@ Easily render meta tags within your Laravel application, using a fluent API
 ## Features
 
 * Simple API
-* Laravel `>=5.8 | 6.x | 7.x` are supported
+* Laravel `>=5.8 | 6.x | 7.x` supported
 * Render named, property type, raw, Twitter card and OpenGraph tags
-* Render default tags on every request
+* Optionally, render default tags on every request
+* Conditionally set tags
 * There is no need to set meta titles for every controller method. The package can optionally guess titles based on uri segments or the current named route
 * Well documented
 
@@ -35,8 +36,6 @@ Optionally publish the configuration file by running:
 ```bash
 php artisan vendor:publish --provider="F9Web\Meta\MetaServiceProvider" --tag="config"
 ```
-
-The configuration file is published to `config/f9web-laravel-meta`.
 
 ## Documentation
 
@@ -77,6 +76,39 @@ Meta::set('title', 'Buy widgets today')
     ->set('description', 'My meta description')
     ->set('theme-color', '#fafafa')
     ->noIndex();
+```
+
+### Conditionally Setting Tags
+
+The `when()` method can be used to conditionally set tags. A boolean condition (indicating if the closure should be executed) and a closure. The closure parameter is full instance of the meta class, meaning all methods are callable.
+
+```php
+
+$noIndex = true;
+
+meta()->when($noIndex, function ($meta) {
+    $meta->noIndex();
+});
+```
+
+The `when()` is fluent and can be called multiple times:
+
+```php
+meta()
+    ->set('title', 'the title')
+    -when(true, function ($meta) {
+        $meta->set('og:description', 'og description');
+    })
+    -when(false, function ($meta) {
+        $meta->set('referrer', 'no-referrer-when-downgrade');
+    })
+    ->noIndex();
+```
+
+If using PHP >=7.4, [arrow functions](https://www.php.net/manual/en/functions.arrow.php) can be optionally used.
+
+```php
+meta()->when(true, fn($meta) => $meta->noIndex());
 ```
 
 ### Blade Directives

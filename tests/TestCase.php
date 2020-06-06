@@ -58,6 +58,15 @@ abstract class TestCase extends OrchestraTestCase
     }
 
     /**
+     * @param  string  $expected
+     * @param  string  $message
+     */
+    public function assertNotRenders(string $expected, $message = '')
+    {
+        $this->assertStringNotContainsString($expected, $this->service->render(), $message);
+    }
+
+    /**
      * @param  \Illuminate\Foundation\Application  $app
      * @return array|string[]
      */
