@@ -23,7 +23,6 @@ use function ucwords;
 
 class Meta implements Htmlable
 {
-    use MetaHelpers;
     use GuessesTitles;
     use Macroable {
         __call as macroCall;
