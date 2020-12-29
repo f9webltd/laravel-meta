@@ -18,17 +18,30 @@ class Title implements Tag
      */
     public function render(string $key, $value = null, Collection $tags = null): HtmlString
     {
+        $config = config('f9web-laravel-meta');
+
         if (! ($title = Arr::get($tags ?? [], 'title'))) {
             return new HtmlString(
-                sprintf('<title>%s</title>', config('f9web-laravel-meta.fallback-meta-title'))
+                sprintf('<title>%s</title>', $config['fallback-meta-title'])
             );
         }
 
-        if ($append = config('f9web-laravel-meta.meta-title-append')) {
+        if (
+            isset($config['meta-title-replacements']['enabled']) &&
+            $config['meta-title-replacements']['enabled'] === true
+        ) {
+            $title = str_replace(
+                $config['meta-title-replacements']['search'] ?? [],
+                $config['meta-title-replacements']['replace'] ?? [],
+                $title
+            );
+        }
+
+        if ($append = $config['meta-title-append']) {
             $title .= ' - ' . $append;
         }
 
-        $title = Str::limit($title, config('f9web-laravel-meta.title-limit') ?? 999, null);
+        $title = Str::limit($title, $config['title-limit'] ?? 999, null);
 
         return new HtmlString(sprintf('<title>%s</title>', $title));
     }

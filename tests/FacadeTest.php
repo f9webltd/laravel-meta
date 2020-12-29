@@ -8,7 +8,7 @@ use F9Web\Meta\MetaFacade;
 class FacadeTest extends TestCase
 {
     /** @test */
-    public function it_passes_calls_to_the_container()
+    public function it_passes_calls_to_the_container(): void
     {
         $this->mock(
             Meta::class,

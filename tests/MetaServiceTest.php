@@ -11,7 +11,7 @@ use function implode;
 class MetaServiceTest extends TestCase
 {
     /** @test */
-    public function it_renders_default_tags()
+    public function it_renders_default_tags(): void
     {
         $this->app['config']->set(
             [
@@ -35,7 +35,7 @@ class MetaServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_renders_using_fluent_methods()
+    public function it_renders_using_fluent_methods(): void
     {
         $this->service
             ->favIcon('/icon.png')
@@ -61,59 +61,59 @@ class MetaServiceTest extends TestCase
                 ]
             );
 
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-            $html = $this->service->render()
+            $html = $this->service::render()
         );
-        $this->assertStringContainsString('<meta name="twitter:title" content="twitter title">', $html);
-        $this->assertStringContainsString('<meta name="description" content="meta description">', $html);
-        $this->assertStringContainsString('<meta property="title" content="property title">', $html);
-        $this->assertStringContainsString('<meta property="og:title" content="og property title">', $html);
-        $this->assertStringContainsString('<title>meta title - Meta Title Append</title>', $html);
-        $this->assertStringContainsString('<meta name="format-detection" content="telephone=no">', $html);
-        $this->assertStringContainsString('<meta name="custom" content="value">', $html);
-        $this->assertStringContainsString('<link rel="pingback" href="https://site.coo.uk/xmlrpc.php" />', $html);
-        $this->assertStringContainsString('<link rel="canonical" href="/url" />', $html);
-        $this->assertStringContainsString('<meta name="shortcut icon" content="/icon.png">', $html);
-        $this->assertStringContainsString('<link rel="icon" type="image/x-icon" href="/icon.png">', $html);
-        $this->assertStringContainsString('<meta name="robots" content="noindex nofollow">', $html);
-        $this->assertStringContainsString(
+        self::assertStringContainsString('<meta name="twitter:title" content="twitter title">', $html);
+        self::assertStringContainsString('<meta name="description" content="meta description">', $html);
+        self::assertStringContainsString('<meta property="title" content="property title">', $html);
+        self::assertStringContainsString('<meta property="og:title" content="og property title">', $html);
+        self::assertStringContainsString('<title>meta title - Meta Title Append</title>', $html);
+        self::assertStringContainsString('<meta name="format-detection" content="telephone=no">', $html);
+        self::assertStringContainsString('<meta name="custom" content="value">', $html);
+        self::assertStringContainsString('<link rel="pingback" href="https://site.coo.uk/xmlrpc.php" />', $html);
+        self::assertStringContainsString('<link rel="canonical" href="/url" />', $html);
+        self::assertStringContainsString('<meta name="shortcut icon" content="/icon.png">', $html);
+        self::assertStringContainsString('<link rel="icon" type="image/x-icon" href="/icon.png">', $html);
+        self::assertStringContainsString('<meta name="robots" content="noindex nofollow">', $html);
+        self::assertStringContainsString(
             '<link rel="manifest" href="manifest.json" crossOrigin="use-credentials">',
             $html
         );
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             '<link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP">',
             $html
         );
     }
 
     /** @test */
-    public function it_allows_fetching_of_single_tags()
+    public function it_allows_fetching_of_single_tags(): void
     {
-        $this->service->set('canonical', '/users/name');
-        $this->service->set('description', 'meta description');
+        $this->service::set('canonical', '/users/name');
+        $this->service::set('description', 'meta description');
 
-        $this->assertEquals('<link rel="canonical" href="/users/name" />', $this->service->render('canonical'));
-        $this->assertEquals(
+        self::assertEquals('<link rel="canonical" href="/users/name" />', $this->service::render('canonical'));
+        self::assertEquals(
             '<meta name="description" content="meta description">',
-            $this->service->render('description')
+            $this->service::render('description')
         );
     }
 
     /** @test */
-    public function it_registers_and_renders_raw_tags()
+    public function it_registers_and_renders_raw_tags(): void
     {
-        $this->service->setRawTag($ping = '<link rel="pingback" href="https://site.com/xmlrpc.php" />');
-        $this->service->setRawTags(
+        $this->service::setRawTag($ping = '<link rel="pingback" href="https://site.com/xmlrpc.php" />');
+        $this->service::setRawTags(
             [
                 $alternate = '<link rel="alternate" href="https://site.com/en.php" hreflang="en" />',
                 $next = '<link rel="next" href="https://site.com/en-2.php" />',
             ]
         );
 
-        $this->assertStringContainsString($ping, collect($this->service->tags())->implode(' '));
-        $this->assertStringContainsString($alternate, collect($this->service->tags())->implode(' '));
-        $this->assertStringContainsString($next, collect($this->service->tags())->implode(' '));
+        self::assertStringContainsString($ping, collect($this->service->tags())->implode(' '));
+        self::assertStringContainsString($alternate, collect($this->service->tags())->implode(' '));
+        self::assertStringContainsString($next, collect($this->service->tags())->implode(' '));
 
         $this->assertRenders(implode(PHP_EOL, [$ping, $alternate, $next]));
     }
@@ -121,7 +121,7 @@ class MetaServiceTest extends TestCase
     /** @test
      * @throws \Exception
      */
-    public function it_can_fetch_all_tags()
+    public function it_can_fetch_all_tags(): void
     {
         $this->service
             ->set('canonical', '/users/name')
@@ -129,34 +129,34 @@ class MetaServiceTest extends TestCase
             ->set('description', 'meta description')
             ->set('property:custom', 'custom');
 
-        $this->assertIsArray($tags = $this->service->tags());
+        self::assertIsArray($tags = $this->service->tags());
 
-        $this->assertArrayHasKey('canonical', $tags);
-        $this->assertEquals('/users/name', $tags['canonical']);
+        self::assertArrayHasKey('canonical', $tags);
+        self::assertEquals('/users/name', $tags['canonical']);
 
-        $this->assertArrayHasKey('og:title', $tags);
-        $this->assertEquals('og title', $tags['og:title']);
+        self::assertArrayHasKey('og:title', $tags);
+        self::assertEquals('og title', $tags['og:title']);
 
-        $this->assertArrayHasKey('description', $tags);
-        $this->assertEquals('meta description', $tags['description']);
+        self::assertArrayHasKey('description', $tags);
+        self::assertEquals('meta description', $tags['description']);
 
-        $this->assertArrayHasKey('property:custom', $tags);
-        $this->assertEquals('custom', $tags['property:custom']);
+        self::assertArrayHasKey('property:custom', $tags);
+        self::assertEquals('custom', $tags['property:custom']);
     }
 
     /** @test */
-    public function it_can_forget_tags()
+    public function it_can_forget_tags(): void
     {
         $this->service
             ->set('canonical', '/users/name')
             ->set('description', 'meta description')
             ->forget('description');
 
-        $this->assertEquals(['canonical' => '/users/name'], $this->service->tags());
+        self::assertEquals(['canonical' => '/users/name'], $this->service->tags());
 
-        $this->service->purge();
+        $this->service::purge();
 
-        $this->assertEmpty($this->service->tags());
+        self::assertEmpty($this->service->tags());
     }
 
     /** @test */
@@ -166,7 +166,7 @@ class MetaServiceTest extends TestCase
             ->canonical('/users/create')
             ->description('meta description');
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'canonical'   => '/users/create',
                 'description' => 'meta description',
@@ -176,86 +176,83 @@ class MetaServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_tags_using_the_to_html_method()
+    public function it_can_render_tags_using_the_to_html_method(): void
     {
-        $this->service->set('canonical', '/users');
+        $this->service::set('canonical', '/users');
 
-        $this->assertStringContainsString('<link rel="canonical" href="/users" />', $this->service->toHtml());
+        self::assertStringContainsString('<link rel="canonical" href="/users" />', $this->service->toHtml());
     }
 
     /** @test */
-    public function it_can_determine_tags_dynamically()
+    public function it_can_determine_tags_dynamically(): void
     {
-        $this->service->set('canonical', '/users');
+        $this->service::set('canonical', '/users');
 
-        $this->assertEquals('/users', $this->service->canonical);
+        self::assertEquals('/users', $this->service->canonical);
     }
 
     /** @test */
-    public function it_get_all_tags_when_calling_with_parameters()
+    public function it_get_all_tags_when_calling_with_parameters(): void
     {
-        $this->service->set('canonical', '/users');
-        $this->service->set('title', 'meta title');
+        $this->service::set('canonical', '/users');
+        $this->service::set('title', 'meta title');
 
-        $this->assertInstanceOf(Collection::class, $this->service->get());
+        self::assertInstanceOf(Collection::class, $this->service->get());
     }
 
     /** @test */
-    public function it_get_all_tags_when_no_standard_tags_have_been_set()
+    public function it_get_all_tags_when_no_standard_tags_have_been_set(): void
     {
-        $this->service->setRawTag('<tag />');
+        $this->service::setRawTag('<tag />');
 
-        $this->assertNotEmpty($this->service->tags());
+        self::assertNotEmpty($this->service->tags());
     }
 
     /** @test */
-    public function it_gets_all_tags_when_no_raw_tags_have_been_set()
+    public function it_gets_all_tags_when_no_raw_tags_have_been_set(): void
     {
-        $this->service->set('canonical', '/users');
+        $this->service::set('canonical', '/users');
 
-        $this->assertTrue(isset($this->service->tags()['canonical']));
+        self::assertTrue(isset($this->service->tags()['canonical']));
     }
 
     /** @test */
-    public function it_gets_all_tags_when_none_are_present()
+    public function it_gets_all_tags_when_none_are_present(): void
     {
-        $this->assertIsArray($this->service->tags());
+        self::assertIsArray($this->service->tags());
     }
 
     /** @test */
-    public function it_handles_calls_to_tags_when_no_tags_are_set()
+    public function it_handles_calls_to_tags_when_no_tags_are_set(): void
     {
-        $this->service->resetTags();
+        $this->service::resetTags();
 
-        $this->assertCount(0, $this->service->tags());
+        self::assertCount(0, $this->service->tags());
 
-        $this->service->set('a', 'b');
+        $this->service::set('a', 'b');
 
-        $this->assertCount(1, $this->service->tags());
+        self::assertCount(1, $this->service->tags());
     }
 
     /** @test */
-    public function it_handles_calls_to_tags_when_no_raw_tags_are_set()
+    public function it_handles_calls_to_tags_when_no_raw_tags_are_set(): void
     {
-        $this->service->resetTags();
+        $this->service::resetTags();
 
-        $this->assertCount(0, $this->service->tags());
+        self::assertCount(0, $this->service->tags());
 
-        $this->service->setRawTag('<link rel="something" href="/users" />');
+        $this->service::setRawTag('<link rel="something" href="/users" />');
 
-        $this->assertCount(1, $this->service->tags());
+        self::assertCount(1, $this->service->tags());
     }
 
-    /**
-     * @test
-     * @group a
-     */
-    public function it_handles_calls_to_set_tags_when_no_tags_are_set()
+    /** @test */
+    public function it_handles_calls_to_set_tags_when_no_tags_are_set(): void
     {
-        $this->service->resetTags();
+        $this->service::resetTags();
 
-        $this->service->set('a', 'b');
+        $this->service::set('a', 'b');
 
-        $this->assertCount(1, $this->service->tags());
+        self::assertCount(1, $this->service->tags());
     }
 }

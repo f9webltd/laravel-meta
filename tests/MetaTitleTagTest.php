@@ -85,4 +85,19 @@ class MetaTitleTagTest extends TestCase
 
         $this->assertRenders('<title></title>');
     }
+
+    /** @test */
+    public function it_renders_the_expected_title_when_hyphens_are_present()
+    {
+        // given the title is not set and a default exists
+        $this->app['config']->set(
+            [
+                'f9web-laravel-meta.fallback-meta-title' => 'App-Name',
+                'f9web-laravel-meta.meta-title-append'   => null,
+            ]
+        );
+
+        // the full title should be present
+        $this->assertRenders('<title>App Name</title>');
+    }
 }

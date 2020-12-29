@@ -2,7 +2,6 @@
 
 namespace F9Web\Meta\Tests;
 
-use function asset;
 use F9Web\Meta\Meta;
 use F9Web\Meta\MetaServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -22,7 +21,7 @@ abstract class TestCase extends OrchestraTestCase
 
     public function tearDown(): void
     {
-        $this->service->purge();
+        $this->service::purge();
 
         $this->app['config']->set(
             [
@@ -51,19 +50,25 @@ abstract class TestCase extends OrchestraTestCase
     /**
      * @param  string  $expected
      * @param  string  $message
+     *
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function assertRenders(string $expected, $message = '')
+    public function assertRenders(string $expected, $message = ''): void
     {
-        $this->assertStringContainsString($expected, $this->service->render(), $message);
+        self::assertStringContainsString($expected, $this->service->render(), $message);
     }
 
     /**
      * @param  string  $expected
      * @param  string  $message
+     *
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function assertNotRenders(string $expected, $message = '')
+    public function assertNotRenders(string $expected, $message = ''): void
     {
-        $this->assertStringNotContainsString($expected, $this->service->render(), $message);
+        self::assertStringNotContainsString($expected, $this->service->render(), $message);
     }
 
     /**

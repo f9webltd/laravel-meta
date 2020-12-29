@@ -35,12 +35,8 @@ class Meta implements Htmlable
     protected static $rawTags = [];
 
     /** @var null|Meta */
-    private static $_instance = null;
+    private static $_instance;
 
-    /**
-     * @param  array  $tags
-     * @return \F9Web\Meta\Meta
-     */
     public static function setRawTags(array $tags = []): self
     {
         array_map(
@@ -53,10 +49,6 @@ class Meta implements Htmlable
         return self::instance();
     }
 
-    /**
-     * @param  string  $value
-     * @return \F9Web\Meta\Meta
-     */
     public static function setRawTag(string $value): self
     {
         if (self::$rawTags === []) {
@@ -68,9 +60,6 @@ class Meta implements Htmlable
         return self::instance();
     }
 
-    /**
-     * @return \F9Web\Meta\Meta|null
-     */
     public static function instance(): ?self
     {
         if (self::$_instance === null) {
@@ -80,10 +69,6 @@ class Meta implements Htmlable
         return self::$_instance;
     }
 
-    /**
-     * @param  string  $tag
-     * @return \F9Web\Meta\Meta
-     */
     public static function forget(string $tag): self
     {
         if (self::$tags->has($tag)) {
@@ -93,9 +78,6 @@ class Meta implements Htmlable
         return self::instance();
     }
 
-    /**
-     * @return \F9Web\Meta\Meta
-     */
     public static function purge(): self
     {
         self::$tags = new Collection();
@@ -119,10 +101,6 @@ class Meta implements Htmlable
         return self::instance();
     }
 
-    /**
-     * @param  array  $items
-     * @return \F9Web\Meta\Meta
-     */
     public static function fromArray(array $items = []): self
     {
         foreach ($items as $key => $value) {
@@ -132,11 +110,6 @@ class Meta implements Htmlable
         return self::instance();
     }
 
-    /**
-     * @param  string  $key
-     * @param  string  $value
-     * @return \F9Web\Meta\Meta
-     */
     public static function set(string $key, string $value): self
     {
         if (self::$tags === null) {
@@ -148,11 +121,6 @@ class Meta implements Htmlable
         return self::instance();
     }
 
-    /**
-     * @param  bool  $condition
-     * @param  \Closure  $callback
-     * @return $this
-     */
     public static function when(bool $condition, Closure $callback): self
     {
         $instance = self::instance();
@@ -165,9 +133,6 @@ class Meta implements Htmlable
         );
     }
 
-    /**
-     * @return array
-     */
     public function tags(): array
     {
         if (null === self::$tags) {
@@ -177,18 +142,11 @@ class Meta implements Htmlable
         return self::$tags->concat(self::$rawTags)->toArray();
     }
 
-    /**
-     * @return string
-     */
     public function toHtml(): string
     {
         return self::render();
     }
 
-    /**
-     * @param  string|null  $tag
-     * @return string
-     */
     public static function render(?string $tag = null): string
     {
         // ensure a meta title is always set
@@ -225,11 +183,6 @@ class Meta implements Htmlable
         );
     }
 
-    /**
-     * @param  string  $value
-     * @param  string  $tag
-     * @return HtmlString
-     */
     public static function getContent(string $value, string $tag): HtmlString
     {
         $tags = self::$tags;
@@ -273,11 +226,11 @@ class Meta implements Htmlable
     }
 
     /**
-     * @param $method
-     * @param $parameters
+     * @param string $method
+     * @param mixed $parameters
      * @return \F9Web\Meta\Meta|null
      */
-    public function __call($method, $parameters): ?self
+    public function __call(string $method, $parameters): ?self
     {
         if (static::hasMacro($method)) {
             return $this->macroCall($method, $parameters);
