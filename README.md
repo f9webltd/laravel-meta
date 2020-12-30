@@ -13,15 +13,16 @@ Easily render meta tags within your Laravel application, using a fluent API
 
 ## Features
 
-* Simple API
-* Laravel `>=5.8 | 6.x | 7.x | 8.x` supported
-* Render named, property type, raw, Twitter card and OpenGraph tags
-* [Optionally, render default tags on every request](#default-tags)
-* [Conditionally set tags](#conditionally-setting-tags)
-* [Macroable](#macroable-support)
-* There is no need to set meta titles for every controller method. The package can [optionally guess titles based on uri](#meta-title) segments or the current named route
-* Well documented
-* Tested, with 100% code coverage
+- Simple API
+- Laravel `>=5.8 | 6.x | 7.x | 8.x` supported
+- `PHP ^8.0` is supported for Laravel >= 6x 
+- Render named, property, raw, Twitter card and OpenGraph type meta tags
+- [Optionally, render default tags on every request](#default-tags)
+- [Conditionally set tags](#conditionally-setting-tags)
+- [Macroable](#macroable-support)
+- There is no need to set meta titles for every controller method. The package can [optionally guess titles based on uri](#meta-title) segments or the current named route
+- Well documented
+- Tested, with 100% code coverage
 
 ## Requirements
 
