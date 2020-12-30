@@ -1,3 +1,5 @@
+![](https://banners.beyondco.de/Laravel%20Meta.png?theme=light&packageManager=composer+require&packageName=f9webltd%2Flaravel-meta&pattern=brickWall&style=style_1&description=Render+meta+tags+within+your+Laravel+application%2C+using+a+fluent+API&md=1&showWatermark=0&fontSize=100px&images=code)
+
 [![Latest Stable Version](https://poser.pugx.org/f9webltd/laravel-meta/v)](https://packagist.org/packages/f9webltd/laravel-meta)
 [![Scrutinizer coverage (GitHub/BitBucket)](https://img.shields.io/scrutinizer/coverage/g/f9webltd/laravel-meta)]()
 [![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/f9webltd/laravel-meta)]()
@@ -5,7 +7,7 @@
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
 [![License](https://poser.pugx.org/f9webltd/laravel-meta/license)](https://packagist.org/packages/f9webltd/laravel-meta)
 
-# Render meta tags within your Laravel application
+# Laravel Meta Tags
 
 Easily render meta tags within your Laravel application, using a fluent API
 
@@ -428,23 +430,23 @@ To allow for fluent method calls ensure the macro returns an instance of the cla
 
 #### Meta title
 
-The package ensures a meta tag is always present. Omitting a title will force the package to guess one.
+The package ensures a meta tag is always present. Omitting a title will force the package to guess one based upon the current named route or uri.
 
-Two methods available, `route` (based on the current named route) and `uri` (the default, based on the raw uri segments). 
+The set the preferred method, edit the `f9web-laravel-meta.title-guessor.method` configuration value. 
 
-The guessing method is configurable via the `f9web-laravel-meta.title-guessor.method` configuration value. 
+##### `uri` method sample
 
-Using the `uri` method, the meta title for `uri` `/orders/create` would be "Orders - Create".
+- if the uri is `/orders/create` thr guessed title is "Orders - Create"
+- if the uri is `/orders/9999/edit` thr guessed title is "Orders - 9999 - Edit"
 
-Similarly, the `uri` `/orders/9999/edit` would generate the title "Orders - 9999 - Edit".
+##### `route` method sample
 
-Using the `route` method, slightly different titles are generated, minus parameters. 
+- current named route is `users.create`, guessed title 'Users - Create'
+- current named route is `users.index`, guessed title 'Users'
 
-The route name `users.create` would generate 'Users - Create' and `users.index` would generate "Users".
+This behaviour can be disabled via editing the `f9web-laravel-meta.title-guessor.enabled` configuration value.
 
-Title guessing can be disabled by adjusting the `f9web-laravel-meta.title-guessor.enabled` configuration value.
-
-This automatic resolution is extremely useful in large applications, where it would be otherwise cumbersome to set metadata for every controller method.
+This automatic resolution is useful in large applications, where it would be otherwise cumbersome to set metadata for every controller method.
  
 ##### Appending text to the meta title
 
@@ -456,7 +458,7 @@ Typically, common data such as the company name is appended to meta titles.
   
 ##### Limiting the meta title length
 
-For SEO reasons, the meta title should typically remain less than ~60 characters. This package, by default, limits the title to 60 characters.
+For SEO reasons, the meta title length should be restricted. This package, by default, limits the title to 60 characters.
 
 To change this behaviour update the configuration value of `f9web-laravel-meta.title-limit`. Set to `null` to stop limiting.
 
@@ -468,11 +470,11 @@ To change the limit adjust the configuration value `f9web-laravel-meta.descripti
 
 #### Canonical
 
-It is important to set a sensible canonical. Optionally, the package can automatically replace user defined strings when generating a canonical.
+It is important to set a sensible [canonical](https://ahrefs.com/blog/canonical-tags/). Optionally, the package can automatically replace user defined strings when generating a canonical.
 
 Due to incorrect setup some Laravel installations allow `public` and/or `index.php` within the url.
 
-For instance, `/users/create` and `/public/index.php/users/create` would both be visitable, crawlable and ultimately indexable urls.
+For instance, `/users/create`, `/public/users/create` and `/public/index.php/users/create` would both be visitable, crawlable and ultimately indexable urls.
 
 By editing the array of removable url strings within `f9web-laravel-meta.removable-uri-segments`, this behaviour can be controlled.
 
