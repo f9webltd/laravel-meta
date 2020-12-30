@@ -56,7 +56,7 @@ abstract class TestCase extends OrchestraTestCase
      */
     public function assertRenders(string $expected, $message = ''): void
     {
-        self::assertStringContainsString($expected, $this->service->render(), $message);
+        self::assertStringContainsString($expected, $this->service::render(), $message);
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class TestCase extends OrchestraTestCase
      */
     public function assertNotRenders(string $expected, $message = ''): void
     {
-        self::assertStringNotContainsString($expected, $this->service->render(), $message);
+        self::assertStringNotContainsString($expected, $this->service::render(), $message);
     }
 
     /**

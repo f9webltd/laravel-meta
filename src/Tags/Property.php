@@ -20,7 +20,7 @@ class Property implements Tag
         return new HtmlString(
             sprintf(
                 '<meta property="%s" content="%s">',
-                str_replace('property:', null, $key),
+                str_replace('property:', '', $key),
                 $value
             )
         );
