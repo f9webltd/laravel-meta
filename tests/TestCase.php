@@ -35,7 +35,7 @@ abstract class TestCase extends OrchestraTestCase
                     'meta-title-replacements' => [
                         'enabled' => true,
                         'search' => [
-                            '-',
+                            '',
                         ],
                         'replace' => [
                             ' ',
