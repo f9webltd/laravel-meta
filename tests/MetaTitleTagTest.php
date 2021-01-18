@@ -92,7 +92,7 @@ class MetaTitleTagTest extends TestCase
         // given the title is not set and a default exists
         $this->app['config']->set(
             [
-                'f9web-laravel-meta.fallback-meta-title' => 'App-Name',
+                'f9web-laravel-meta.fallback-meta-title' => 'App Name',
                 'f9web-laravel-meta.meta-title-append'   => null,
             ]
         );

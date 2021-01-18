@@ -85,15 +85,15 @@ return [
     | Title tag replacements
     |--------------------------------------------------------------------------
     |
-    | Optionally replace specific title characters. By default a hyphen
-    | is replaced by a space
+    | Optionally replace specific title characters. By default, no characters
+    | are replaced.
     |
     */
     'meta-title-replacements' => [
         'enabled' => true,
 
         'search' => [
-            '-',
+            '',
         ],
 
         'replace' => [

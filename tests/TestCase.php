@@ -32,6 +32,15 @@ abstract class TestCase extends OrchestraTestCase
                         'enabled' => true,
                         'method'  => 'route',
                     ],
+                    'meta-title-replacements' => [
+                        'enabled' => true,
+                        'search' => [
+                            '-',
+                        ],
+                        'replace' => [
+                            ' ',
+                        ]
+                    ],
                     'removable-uri-segments' => [
                         '/public',
                         '/index.php',

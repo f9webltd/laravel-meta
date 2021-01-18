@@ -40,7 +40,7 @@ class Meta implements Htmlable
     public static function setRawTags(array $tags = []): self
     {
         array_map(
-            function ($tag) {
+            static function ($tag) {
                 self::setRawTag($tag);
             },
             $tags
