@@ -74,7 +74,9 @@ class TitleGuessor
      */
     private function getUriSegments(): Collection
     {
-        return collect(explode('/', parse_url($this->uri)['path']))->filter();
+        $url = parse_url($this->uri)['path'] ?? '/';
+
+        return collect(explode('/', $url))->filter();
     }
 
     /**

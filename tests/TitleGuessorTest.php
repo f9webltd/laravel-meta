@@ -26,7 +26,7 @@ class TitleGuessorTest extends TestCase
     }
 
     /** @test */
-    public function it_reset_class_properties()
+    public function it_resets_class_properties()
     {
         $service = new TitleGuessor();
         $service->withRoute('users.create');
@@ -108,6 +108,9 @@ class TitleGuessorTest extends TestCase
             ['Users - 999', '/users/999'],
             ['Users', '/users'],
             ['Products - Software - Computing - Algorithms', '/products/software/computing/algorithms'],
+            ['', '/www.baidu.com:443'],
+            ['', '/ios.prod.ftl.netflix.com:443'],
+            ['', 'ip.ws.126.net:443'],
         ];
     }
 
