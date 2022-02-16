@@ -38,6 +38,7 @@ class MetaServiceProvider extends ServiceProvider
         Meta::macro(
             'noIndex',
             function () {
+                Meta:forget('robots');
                 return Meta::set('robots', 'noindex nofollow');
             }
         );
