@@ -12,7 +12,7 @@ Easily render meta tags within your Laravel application, using a fluent API
 ## Features
 
 - Simple API
-- Laravel `>=5.8 | 6.x | 7.x | 8.x` supported
+- Laravel `>=5.8 | 6.x | 7.x | 8.x | 9.x` supported
 - `PHP ^8.0` is supported for Laravel >= 6x 
 - Render named, property, raw, Twitter card and OpenGraph type meta tags
 - [Optionally, render default tags on every request](#default-tags)
