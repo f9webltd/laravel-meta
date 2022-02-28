@@ -71,7 +71,7 @@ class Meta implements Htmlable
 
     public static function forget(string $tag): self
     {
-        if (self::$tags->has($tag)) {
+        if (null !== self::$tags && self::$tags->has($tag)) {
             self::$tags->pull($tag);
         }
 
