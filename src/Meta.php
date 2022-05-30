@@ -156,10 +156,12 @@ class Meta implements Htmlable
 
         // register default tags on each request
         foreach (config('f9web-laravel-meta.defaults') as $key => $value) {
-            if (is_int($key)) {
-                self::setRawTag($value);
-            } else {
-                self::set($key, $value);
+            if (!Arr::has(self::$tags, $key)) {
+                if (is_int($key)) {
+                    self::setRawTag($value);
+                } else {
+                    self::set($key, $value);
+                }
             }
         }
 
