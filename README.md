@@ -1,6 +1,6 @@
 ![](https://banners.beyondco.de/Laravel%20Meta.png?theme=light&packageManager=composer+require&packageName=f9webltd%2Flaravel-meta&pattern=brickWall&style=style_1&description=Render+meta+tags+within+your+Laravel+application%2C+using+a+fluent+API&md=1&showWatermark=0&fontSize=100px&images=code)
 
-[![Latest Stable Version](https://poser.pugx.org/f9webltd/laravel-meta/v)](https://packagist.org/packages/f9webltd/laravel-meta)
+[![Packagist Version](https://img.shields.io/packagist/v/f9webltd/laravel-meta?style=flat-square)](https://packagist.org/packages/f9webltd/laravel-meta)
 [![Run Tests - Current](https://github.com/f9webltd/laravel-meta/actions/workflows/run-tests.yml/badge.svg)](https://github.com/f9webltd/laravel-meta/actions/workflows/run-tests.yml)
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
 [![License](https://poser.pugx.org/f9webltd/laravel-meta/license)](https://packagist.org/packages/f9webltd/laravel-meta)
