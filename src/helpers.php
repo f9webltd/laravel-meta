@@ -2,7 +2,7 @@
 
 use F9Web\Meta\Meta;
 
-if (! function_exists('meta')) {
+if (!function_exists('meta')) {
     /**
      * @param  string|null  $key
      * @return array|\F9Web\Meta\Meta|string|null
