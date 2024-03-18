@@ -25,9 +25,11 @@ Easily render meta tags within your Laravel application, using a fluent API
 - PHP `^8.0`
 - Laravel `^8.12`, `^9.0`, `^10.0` or `^11.0`
 
-### Legacy Support
+### Legacy Support / Upgrading
 
 For PHP `<8.0` and Laravel `<8.12` / support, use package version [`^1.7.7`](https://github.com/f9webltd/laravel-meta/tree/1.7.7)
+
+If upgrading from `^1.0`,  see [UPGRADING](UPGRADING.md) for details.
 
 ## Installation
 
