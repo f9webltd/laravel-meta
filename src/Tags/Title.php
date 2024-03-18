@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace F9Web\Meta\Tags;
 
 use function config;
+
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+
 use function sprintf;
 
 class Title implements Tag
@@ -20,7 +22,7 @@ class Title implements Tag
     {
         $config = config('f9web-laravel-meta');
 
-        if (! ($title = Arr::get($tags ?? [], 'title'))) {
+        if (!($title = Arr::get($tags ?? [], 'title'))) {
             return new HtmlString(
                 sprintf('<title>%s</title>', $config['fallback-meta-title'])
             );
