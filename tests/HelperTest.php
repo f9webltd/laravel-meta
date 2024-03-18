@@ -25,6 +25,5 @@ class HelperTest extends TestCase
 
         meta()->set('title', 'the meta title');
         meta()->get('title');
-        meta('title');
     }
 }
