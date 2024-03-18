@@ -5,6 +5,7 @@ namespace F9Web\Meta\Tests;
 use F9Web\Meta\Meta;
 use F9Web\Meta\MetaServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+
 use function resolve;
 
 abstract class TestCase extends OrchestraTestCase

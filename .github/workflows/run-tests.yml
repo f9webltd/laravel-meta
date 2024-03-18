@@ -1,4 +1,4 @@
-name: run-tests-laravel-7
+name: "Run Tests - Current"
 
 on: [push, pull_request]
 
@@ -9,33 +9,39 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [8.0, 7.4, 7.2]
-        laravel: [7.*, 6.*, 5.8.*]
-        dependency-version: [prefer-stable]
+        php: [8.3, 8.2, 8.1, 8.0]
+        laravel: ["^11.0", "^10.0", "^9.0", "^8.12"]
+        dependency-version: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 7.*
-            testbench: 5.*
-          - laravel: 6.*
-            testbench: 4.*
-          - laravel: 5.8.*
-            testbench: 3.*
+          - laravel: ^11.0
+            testbench: 9.*
+          - laravel: ^10.0
+            testbench: 8.*
+          - laravel: ^9.0
+            testbench: 7.*
+          - laravel: ^8.12
+            testbench: ^6.23
         exclude:
-         - laravel: 5.8.*
-           php: 8.0
-         - laravel: 5.8.*
-           php: 7.4
+          - laravel: ^10.0
+            php: 8.0
+          - laravel: ^8.12
+            php: 8.3
+          - laravel: ^11.0
+            php: 8.1
+          - laravel: ^11.0
+            php: 8.0
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
-          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}   
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -48,5 +54,9 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "symfony/console:>=4.3.4" "mockery/mockery:^1.3.2" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: Display PHP version
+        run: php -v | grep ^PHP | cut -d' ' -f2
+
       - name: Execute tests
-        run: vendor/bin/phpunit --color=always tests
+        run: vendor/bin/phpunit

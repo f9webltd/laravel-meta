@@ -12,7 +12,6 @@ Easily render meta tags within your Laravel application, using a fluent API
 ## Features
 
 - Simple API
-- Laravel `>=5.8 | 6.x | 7.x | 8.x | 9.x | 10.x` supported
 - Render named, property, raw, Twitter card and OpenGraph type meta tags
 - [Optionally, render default tags on every request](#default-tags)
 - [Conditionally set tags](#conditionally-setting-tags)
@@ -23,7 +22,14 @@ Easily render meta tags within your Laravel application, using a fluent API
 
 ## Requirements
 
-PHP >= 7.2, Laravel >= 5.8.
+- PHP `^8.0`
+- Laravel `^8.12`, `^9.0`, `^10.0` or `^11.0`
+
+### Legacy Support / Upgrading
+
+For PHP `<8.0` and Laravel `<8.12` / support, use package version [`^1.7.7`](https://github.com/f9webltd/laravel-meta/tree/1.7.7)
+
+If upgrading from `^1.0`,  see [UPGRADING](UPGRADING.md) for details.
 
 ## Installation
 
@@ -98,19 +104,9 @@ The `when()` is fluent and can be called multiple times:
 ```php
 meta()
     ->set('title', 'the title')
-    -when(true, function ($meta) {
-        $meta->set('og:description', 'og description');
-    })
-    -when(false, function ($meta) {
-        $meta->set('referrer', 'no-referrer-when-downgrade');
-    })
+    -when(true, fn ($meta) => $meta->set('og:description', 'og description'))
+    -when(false, fn ($meta) => $meta->set('referrer', 'no-referrer-when-downgrade'))
     ->noIndex();
-```
-
-If using PHP >=7.4, [arrow functions](https://www.php.net/manual/en/functions.arrow.php) can be optionally used.
-
-```php
-meta()->when(true, fn($meta) => $meta->noIndex());
 ```
 
 ### Blade Directives

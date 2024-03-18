@@ -3,10 +3,13 @@
 namespace F9Web\Meta;
 
 use F9Web\Meta\Exceptions\GuessorException;
+
 use function collect;
 use function config;
 use function explode;
+
 use Illuminate\Support\Collection;
+
 use function in_array;
 use function parse_url;
 use function str_replace;
@@ -30,13 +33,13 @@ class TitleGuessor
     {
         $config = config('f9web-laravel-meta.title-guessor');
 
-        if (! $config['enabled']) {
+        if (!$config['enabled']) {
             return null;
         }
 
         $this->setMethod($config['method']);
 
-        if (! in_array($method = $this->getMethod(), ['route', 'uri'])) {
+        if (!in_array($method = $this->getMethod(), ['route', 'uri'])) {
             throw new GuessorException();
         }
 

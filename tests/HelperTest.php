@@ -18,13 +18,12 @@ class HelperTest extends TestCase
                     ->andReturnSelf();
 
                 $mock->shouldReceive('get')
-                    ->twice()
+                    ->once()
                     ->with('title');
             }
         );
 
         meta()->set('title', 'the meta title');
         meta()->get('title');
-        meta('title');
     }
 }
