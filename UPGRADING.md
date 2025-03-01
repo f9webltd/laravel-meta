@@ -1,5 +1,10 @@
 # Upgrading
 
+## From 2.x to 3.x
+
+- This package now **automatically** encoded strings using `htmlentities`. This is a breaking change as already encoded strings may be passed to this package. See the [package readme](https://github.com/f9webltd/laravel-meta#quotes) for an updated usage example
+- No further changes are required
+
 ## From 1.x to 2.x
 
 - Run the following command to fetch the latets version of the package: `composer require f9webltd/laravel-meta:^2.0`

@@ -116,6 +116,10 @@ class Meta implements Htmlable
             self::$tags = new Collection();
         }
 
+        if (str_contains($value, '"') || str_contains($value, '\'')) {
+            $value = htmlentities($value, ENT_QUOTES, 'UTF-8');
+        }
+
         self::$tags->put($key, $value);
 
         return self::instance();

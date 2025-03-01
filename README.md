@@ -86,6 +86,22 @@ Meta::set('title', 'Buy widgets today')
     ->noIndex();
 ```
 
+#### Quotes
+
+This package with handle double and single quotations within meta tag values as per Google recommendations.
+
+The follwog code:
+
+```php
+Meta::set('description', 'We sell 20" industrial nails');
+```
+
+Actual output:
+
+```html
+<meta name="description" content="We sell 20&quot; industrial nails">
+```
+
 ### Conditionally Setting Tags
 
 The `when()` method can be used to conditionally set tags. A boolean condition (indicating if the closure should be executed) and a closure. The closure parameter is full instance of the meta class, meaning all methods are callable.
