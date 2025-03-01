@@ -20,7 +20,7 @@ class BladeDirectiveTest extends TestCase
     /**
      * @return array|\string[][]
      */
-    public function bladeDataProvider(): array
+    public static function bladeDataProvider(): array
     {
         return [
             [

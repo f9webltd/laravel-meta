@@ -20,7 +20,7 @@ class MetaPropertyTagTest extends TestCase
     /**
      * @return array|\string[][]
      */
-    public function metaPropertyTagsProvider(): array
+    public static function metaPropertyTagsProvider(): array
     {
         return [
             [

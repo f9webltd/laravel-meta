@@ -23,7 +23,7 @@ Easily render meta tags within your Laravel application, using a fluent API
 ## Requirements
 
 - PHP `^8.0`
-- Laravel `^8.12`, `^9.0`, `^10.0` or `^11.0`
+- Laravel `^8.12`, `^9.0`, `^10.0`, `^11.0` or `^12.0`
 
 ### Legacy Support / Upgrading
 
