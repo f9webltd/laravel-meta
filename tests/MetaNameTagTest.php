@@ -20,7 +20,7 @@ class MetaNameTagTest extends TestCase
     /**
      * @return array|\string[][]
      */
-    public function metaNameTagsProvider(): array
+    public static function metaNameTagsProvider(): array
     {
         return [
             [
