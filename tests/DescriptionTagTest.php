@@ -7,6 +7,20 @@ use function substr;
 class DescriptionTagTest extends TestCase
 {
     /** @test */
+    public function it_renders_the_expected_description_containg_quotes()
+    {
+        $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
+
+        $this->service->set('description', 'We sell 20" industrial nails');
+
+        $this->assertRenders('<meta name="description" content="We sell 20&quot; industrial nails"');
+
+        $this->service->set('description', "This is a good ol' SEO description");
+
+        $this->assertRenders('<meta name="description" content="This is a good ol&#039; SEO description"');
+    }
+
+    /** @test */
     public function it_renders_the_expected_description()
     {
         $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
