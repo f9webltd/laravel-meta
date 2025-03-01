@@ -5,6 +5,20 @@ namespace F9Web\Meta\Tests;
 class MetaTitleTagTest extends TestCase
 {
     /** @test */
+    public function it_renders_the_expected_title_containg_quotes()
+    {
+        $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
+
+        $this->service->set('title', 'We sell 20" industrial nails');
+
+        $this->assertRenders('<title>We sell 20&quot; industrial nails - Meta Title Append</title>');
+
+        $this->service->set('title', "This is a good ol' SEO description");
+
+        $this->assertRenders('<title>This is a good ol&#039; SEO description - Meta Title Append</title>');
+    }
+
+    /** @test */
     public function it_renders_with_an_appended_title()
     {
         $this->app['config']->set(['f9web-laravel-meta.meta-title-append' => 'AcmeLtd']);
