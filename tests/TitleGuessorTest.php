@@ -97,7 +97,7 @@ class TitleGuessorTest extends TestCase
     /**
      * @return array|\string[][]
      */
-    public function uriSegmentsProvider(): array
+    public static function uriSegmentsProvider(): array
     {
         return [
             ['Users - 23 - Edit', 'https://www.site.co.uk/users/23/edit'],
@@ -141,7 +141,7 @@ class TitleGuessorTest extends TestCase
     /**
      * @return array|\string[][]
      */
-    public function namedRoutesProvider(): array
+    public static function namedRoutesProvider(): array
     {
         return [
             ['Users - Create', 'users.create'],
