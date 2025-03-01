@@ -41,7 +41,7 @@ class CanonicalTagTest extends TestCase
     /**
      * @return array|\string[][]
      */
-    public function canonicalUrlsProvider(): array
+    public static function canonicalUrlsProvider(): array
     {
         return [
             ['/users/profile/abc', '/users/profile/abc'],
