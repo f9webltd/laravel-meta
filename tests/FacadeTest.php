@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
 
 use F9Web\Meta\Meta;
@@ -7,8 +9,7 @@ use F9Web\Meta\MetaFacade;
 
 class FacadeTest extends TestCase
 {
-    /** @test */
-    public function it_passes_calls_to_the_container(): void
+    public function test_it_passes_calls_to_the_container(): void
     {
         $this->mock(
             Meta::class,
