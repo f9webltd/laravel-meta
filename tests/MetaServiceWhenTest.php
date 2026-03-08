@@ -6,8 +6,7 @@ namespace F9Web\Meta\Tests;
 
 class MetaServiceWhenTest extends TestCase
 {
-    /** @test */
-    public function it_sets_tags_when_the_condition_is_true()
+    public function test_it_sets_tags_when_the_condition_is_true()
     {
         $this->service->set('description', 'hello');
 
@@ -26,8 +25,7 @@ class MetaServiceWhenTest extends TestCase
         $this->assertRenders('<meta name="robots" content="noindex nofollow">');
     }
 
-    /** @test */
-    public function it_does_not_set_tags_when_the_condition_is_false()
+    public function test_it_does_not_set_tags_when_the_condition_is_false()
     {
         $this->assertCount(0, $this->service->tags());
 
@@ -46,8 +44,7 @@ class MetaServiceWhenTest extends TestCase
         $this->assertRenders('<link rel="canonical" href="/users" />');
     }
 
-    /** @test */
-    public function it_allows_fluent_calls()
+    public function test_it_allows_fluent_calls()
     {
         $this->assertCount(0, $this->service->tags());
 
