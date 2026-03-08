@@ -10,6 +10,8 @@ use function resolve;
 
 abstract class TestCase extends OrchestraTestCase
 {
+    public static $latestResponse;
+
     /** @var \F9Web\Meta\Meta */
     protected $service;
 
