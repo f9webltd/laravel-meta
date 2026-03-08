@@ -1,5 +1,7 @@
 ![](https://banners.beyondco.de/Laravel%20Meta.png?theme=light&packageManager=composer+require&packageName=f9webltd%2Flaravel-meta&pattern=brickWall&style=style_1&description=Render+meta+tags+within+your+Laravel+application%2C+using+a+fluent+API&md=1&showWatermark=0&fontSize=100px&images=code)
 
+
+[![PHP ^8.2](https://img.shields.io/badge/php-%5E8.2-brightgreen)]()
 [![Packagist Version](https://img.shields.io/packagist/v/f9webltd/laravel-meta?style=flat-square)](https://packagist.org/packages/f9webltd/laravel-meta)
 [![Run Tests - Current](https://github.com/f9webltd/laravel-meta/actions/workflows/run-tests.yml/badge.svg)](https://github.com/f9webltd/laravel-meta/actions/workflows/run-tests.yml)
 [![StyleCI Status](https://github.styleci.io/repos/264978205/shield)](https://github.styleci.io/repos/264978205)
@@ -22,14 +24,14 @@ Easily render meta tags within your Laravel application, using a fluent API
 
 ## Requirements
 
-- PHP `^8.0`
-- Laravel `^8.12`, `^9.0`, `^10.0`, `^11.0` or `^12.0`
+- PHP `^8.2`
+- Laravel `^11.0`, `^12.0` or `^13.0`
 
 ### Legacy Support / Upgrading
 
-For PHP `<8.0` and Laravel `<8.12` / support, use package version [`^1.7.7`](https://github.com/f9webltd/laravel-meta/tree/1.7.7)
+For legacy support use package version [`^3.0.0`](https://github.com/f9webltd/laravel-meta/tree/3.0.0)
 
-If upgrading from `^1.0`,  see [UPGRADING](UPGRADING.md) for details.
+See [UPGRADING](UPGRADING.md) for details on breaking changes.
 
 ## Installation
 
@@ -507,6 +509,7 @@ If you discover any security related issues, please email rob@f9web.co.uk instea
 ## Credits
 
 - [Rob Allport](https://github.com/ultrono)
+- [All Contributors](https://github.com/f9webltd/laravel-meta/graphs/contributors)
 
 ## License
 

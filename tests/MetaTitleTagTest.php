@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
 
 class MetaTitleTagTest extends TestCase
 {
-    /** @test */
-    public function it_renders_the_expected_title_containg_quotes()
+    public function test_it_renders_the_expected_title_containg_quotes()
     {
         $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
 
@@ -18,8 +19,7 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title>This is a good ol&#039; SEO description - Meta Title Append</title>');
     }
 
-    /** @test */
-    public function it_renders_with_an_appended_title()
+    public function test_it_renders_with_an_appended_title()
     {
         $this->app['config']->set(['f9web-laravel-meta.meta-title-append' => 'AcmeLtd']);
 
@@ -28,8 +28,7 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title>Widgets, Best Widgets - AcmeLtd</title>');
     }
 
-    /** @test */
-    public function it_renders_without_an_appended_title()
+    public function test_it_renders_without_an_appended_title()
     {
         $this->app['config']->set(['f9web-laravel-meta.meta-title-append' => null]);
 
@@ -38,8 +37,7 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title>Widgets, Best Widgets</title>');
     }
 
-    /** @test */
-    public function it_renders_a_none_limited_title_length()
+    public function test_it_renders_a_none_limited_title_length()
     {
         $this->app['config']->set(
             [
@@ -55,8 +53,7 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title>abcdefghijklmnopqrstuvwxyz</title>');
     }
 
-    /** @test */
-    public function it_renders_a_limited_title_length()
+    public function test_it_renders_a_limited_title_length()
     {
         // given the title is limited to 10 characters ...
         $this->app['config']->set(
@@ -72,7 +69,6 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title>abcde</title>');
     }
 
-    /** @test */
     public function it_renders_the_default_title_when_one_is_not_set()
     {
         // given the title is not set and a default exists
@@ -87,8 +83,7 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title>App Name</title>');
     }
 
-    /** @test */
-    public function it_renders_an_empty_title_when_one_is_not_set_and_no_default_exists()
+    public function test_it_renders_an_empty_title_when_one_is_not_set_and_no_default_exists()
     {
         $this->app['config']->set(
             [
@@ -100,8 +95,7 @@ class MetaTitleTagTest extends TestCase
         $this->assertRenders('<title></title>');
     }
 
-    /** @test */
-    public function it_renders_the_expected_title_when_hyphens_are_present()
+    public function test_it_renders_the_expected_title_when_hyphens_are_present()
     {
         // given the title is not set and a default exists
         $this->app['config']->set(

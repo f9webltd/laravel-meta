@@ -6,6 +6,7 @@ namespace F9Web\Meta\Tests;
 
 use F9Web\Meta\Exceptions\GuessorException;
 use F9Web\Meta\TitleGuessor;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class TitleGuessorTest extends TestCase
 {
@@ -25,8 +26,7 @@ class TitleGuessorTest extends TestCase
         parent::tearDown();
     }
 
-    /** @test */
-    public function it_resets_class_properties()
+    public function test_it_resets_class_properties()
     {
         $service = new TitleGuessor();
         $service->withRoute('users.create');
@@ -40,8 +40,7 @@ class TitleGuessorTest extends TestCase
         $this->assertNull($service->getRoute());
     }
 
-    /** @test */
-    public function it_returns_null_when_disabled()
+    public function test_it_returns_null_when_disabled()
     {
         $this->app['config']->set(
             [
@@ -56,8 +55,7 @@ class TitleGuessorTest extends TestCase
         $this->assertNull((new TitleGuessor())->render());
     }
 
-    /** @test */
-    public function it_throws_an_exception__when_an_invalid_guessing_method_is_provided()
+    public function test_it_throws_an_exception__when_an_invalid_guessing_method_is_provided()
     {
         $this->expectException(GuessorException::class);
 
@@ -70,13 +68,8 @@ class TitleGuessorTest extends TestCase
         (new TitleGuessor())->render();
     }
 
-    /**
-     * @test
-     * @dataProvider uriSegmentsProvider
-     * @param  string  $title
-     * @param  string  $uri
-     */
-    public function it_determines_the_title_using_uri_segments(string $title, string $uri)
+    #[DataProvider('uriSegmentsProvider')]
+    public function test_it_determines_the_title_using_uri_segments(string $title, string $uri)
     {
         $this->app['config']->set(
             [
@@ -114,13 +107,8 @@ class TitleGuessorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider  namedRoutesProvider
-     * @param  string  $title
-     * @param  string  $route
-     */
-    public function it_determines_the_title_using_named_routes(string $title, string $route)
+    #[DataProvider('namedRoutesProvider')]
+    public function test_it_determines_the_title_using_named_routes(string $title, string $route)
     {
         $this->app['config']->set(
             [

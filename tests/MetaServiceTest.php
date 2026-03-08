@@ -10,8 +10,7 @@ use function implode;
 
 class MetaServiceTest extends TestCase
 {
-    /** @test */
-    public function it_renders_default_tags(): void
+    public function test_it_renders_default_tags(): void
     {
         $this->app['config']->set(
             [
@@ -34,8 +33,7 @@ class MetaServiceTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_renders_using_fluent_methods(): void
+    public function test_it_renders_using_fluent_methods(): void
     {
         $this->service
             ->favIcon('/icon.png')
@@ -87,8 +85,7 @@ class MetaServiceTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_fetching_of_single_tags(): void
+    public function test_it_allows_fetching_of_single_tags(): void
     {
         $this->service::set('canonical', '/users/name');
         $this->service::set('description', 'meta description');
@@ -100,8 +97,7 @@ class MetaServiceTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_registers_and_renders_raw_tags(): void
+    public function test_it_registers_and_renders_raw_tags(): void
     {
         $this->service::setRawTag($ping = '<link rel="pingback" href="https://site.com/xmlrpc.php" />');
         $this->service::setRawTags(
@@ -118,10 +114,10 @@ class MetaServiceTest extends TestCase
         $this->assertRenders(implode(PHP_EOL, [$ping, $alternate, $next]));
     }
 
-    /** @test
+    /**
      * @throws \Exception
      */
-    public function it_can_fetch_all_tags(): void
+    public function test_it_can_fetch_all_tags(): void
     {
         $this->service
             ->set('canonical', '/users/name')
@@ -144,8 +140,7 @@ class MetaServiceTest extends TestCase
         self::assertEquals('custom', $tags['property:custom']);
     }
 
-    /** @test */
-    public function it_can_forget_tags(): void
+    public function test_it_can_forget_tags(): void
     {
         $this->service
             ->set('canonical', '/users/name')
@@ -159,8 +154,7 @@ class MetaServiceTest extends TestCase
         self::assertEmpty($this->service->tags());
     }
 
-    /** @test */
-    public function it_can_set_tags_dynamically()
+    public function test_it_can_set_tags_dynamically()
     {
         $this->service
             ->canonical('/users/create')
@@ -175,24 +169,21 @@ class MetaServiceTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_can_render_tags_using_the_to_html_method(): void
+    public function test_it_can_render_tags_using_the_to_html_method(): void
     {
         $this->service::set('canonical', '/users');
 
         self::assertStringContainsString('<link rel="canonical" href="/users" />', $this->service->toHtml());
     }
 
-    /** @test */
-    public function it_can_determine_tags_dynamically(): void
+    public function test_it_can_determine_tags_dynamically(): void
     {
         $this->service::set('canonical', '/users');
 
         self::assertEquals('/users', $this->service->canonical);
     }
 
-    /** @test */
-    public function it_get_all_tags_when_calling_with_parameters(): void
+    public function test_it_get_all_tags_when_calling_with_parameters(): void
     {
         $this->service::set('canonical', '/users');
         $this->service::set('title', 'meta title');
@@ -200,30 +191,26 @@ class MetaServiceTest extends TestCase
         self::assertInstanceOf(Collection::class, $this->service->get());
     }
 
-    /** @test */
-    public function it_get_all_tags_when_no_standard_tags_have_been_set(): void
+    public function test_it_get_all_tags_when_no_standard_tags_have_been_set(): void
     {
         $this->service::setRawTag('<tag />');
 
         self::assertNotEmpty($this->service->tags());
     }
 
-    /** @test */
-    public function it_gets_all_tags_when_no_raw_tags_have_been_set(): void
+    public function test_it_gets_all_tags_when_no_raw_tags_have_been_set(): void
     {
         $this->service::set('canonical', '/users');
 
         self::assertTrue(isset($this->service->tags()['canonical']));
     }
 
-    /** @test */
-    public function it_gets_all_tags_when_none_are_present(): void
+    public function test_it_gets_all_tags_when_none_are_present(): void
     {
         self::assertIsArray($this->service->tags());
     }
 
-    /** @test */
-    public function it_handles_calls_to_tags_when_no_tags_are_set(): void
+    public function test_it_handles_calls_to_tags_when_no_tags_are_set(): void
     {
         $this->service::resetTags();
 
@@ -234,8 +221,7 @@ class MetaServiceTest extends TestCase
         self::assertCount(1, $this->service->tags());
     }
 
-    /** @test */
-    public function it_handles_calls_to_tags_when_no_raw_tags_are_set(): void
+    public function test_it_handles_calls_to_tags_when_no_raw_tags_are_set(): void
     {
         $this->service::resetTags();
 
@@ -246,8 +232,7 @@ class MetaServiceTest extends TestCase
         self::assertCount(1, $this->service->tags());
     }
 
-    /** @test */
-    public function it_handles_calls_to_set_tags_when_no_tags_are_set(): void
+    public function test_it_handles_calls_to_set_tags_when_no_tags_are_set(): void
     {
         $this->service::resetTags();
 

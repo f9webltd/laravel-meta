@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
 
 use function substr;
 
 class DescriptionTagTest extends TestCase
 {
-    /** @test */
-    public function it_renders_the_expected_description_containg_quotes()
+    public function test_it_renders_the_expected_description_containg_quotes()
     {
         $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
 
@@ -20,8 +21,7 @@ class DescriptionTagTest extends TestCase
         $this->assertRenders('<meta name="description" content="This is a good ol&#039; SEO description"');
     }
 
-    /** @test */
-    public function it_renders_the_expected_description()
+    public function test_it_renders_the_expected_description()
     {
         $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
 
@@ -30,8 +30,7 @@ class DescriptionTagTest extends TestCase
         $this->assertRenders('<meta name="description" content="some content"');
     }
 
-    /** @test */
-    public function it_renders_the_expected_description_using_dynamic_function_calls()
+    public function test_it_renders_the_expected_description_using_dynamic_function_calls()
     {
         $this->app['config']->set(['f9web-laravel-meta.description-limit' => null]);
 
@@ -40,8 +39,7 @@ class DescriptionTagTest extends TestCase
         $this->assertRenders('<meta name="description" content="some content"');
     }
 
-    /** @test */
-    public function it_renders_the_expected_description_when_a_limit_is_set()
+    public function test_it_renders_the_expected_description_when_a_limit_is_set()
     {
         $this->app['config']->set(['f9web-laravel-meta.description-limit' => $limit = 5]);
 

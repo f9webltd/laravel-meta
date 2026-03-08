@@ -1,16 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
+
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class MetaPropertyTagTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider metaPropertyTagsProvider
-     * @param  array  $data
-     * @param  string  $expected
-     */
-    public function it_renders_open_graph_tags(array $data, string $expected)
+    #[DataProvider('metaPropertyTagsProvider')]
+    public function test_it_renders_open_graph_tags(array $data, string $expected)
     {
         $this->service->set($data[0], $data[1]);
 

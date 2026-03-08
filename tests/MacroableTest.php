@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
 
 use F9Web\Meta\Meta;
 
 class MacroableTest extends TestCase
 {
-    /** @test */
-    public function it_allows_macroable_methods()
+    public function test_it_allows_macroable_methods()
     {
         Meta::macro('pageNotFound', function () {
             return Meta::noIndex()
@@ -27,8 +28,7 @@ class MacroableTest extends TestCase
         $this->assertRenders('<meta property="og:title" content="the og title">');
     }
 
-    /** @test */
-    public function it_allows_for_macroable_methods_with_arguments()
+    public function test_it_allows_for_macroable_methods_with_arguments()
     {
         Meta::macro('setSomethingUnnecessarily', function ($name, $content) {
             return Meta::set($name, $content)->noIndex();
@@ -42,7 +42,6 @@ class MacroableTest extends TestCase
         $this->assertRenders('<meta name="robots" content="noindex nofollow">');
     }
 
-    /** @test */
     public function it_allows_for_macroable_methods_with_arguments_and_internal_logic()
     {
         Meta::macro('setPaginationTags', function (array $data) {
