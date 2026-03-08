@@ -1,24 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
+
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class CanonicalTagTest extends TestCase
 {
-    /** @test */
-    public function it_renders_the_expected_raw_tag()
+    public function test_it_renders_the_expected_raw_tag()
     {
         $this->service->set('canonical', '/users/profile/abc');
 
         $this->assertRenders('<link rel="canonical" href="/users/profile/abc" />');
     }
 
-    /**
-     * @test
-     * @dataProvider canonicalUrlsProvider
-     * @param  string  $actual
-     * @param  string  $expected
-     */
-    public function it_renders_the_expected_adjusted_tag_url(string $actual, string $expected)
+    #[DataProvider('canonicalUrlsProvider')]
+    public function test_it_renders_the_expected_adjusted_tag_url(string $actual, string $expected)
     {
         $this->app['config']->set(
             [
