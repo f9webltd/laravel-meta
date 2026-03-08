@@ -1,16 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
+
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class MetaNameTagTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider metaNameTagsProvider
-     * @param  string  $key
-     * @param  string  $value
-     */
-    public function it_renders_the_expected_tags(string $key, string $value)
+    #[DataProvider('metaNameTagsProvider')]
+    public function test_it_renders_the_expected_tags(string $key, string $value)
     {
         $this->service->set($key, $value);
 
