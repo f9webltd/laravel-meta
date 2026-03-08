@@ -21,15 +21,15 @@
       "role": "Developer"
     }
   ],
- "require": {
-    "php": "^8.0",
-    "illuminate/config": "^8.12|^9.0|^10.0|^11.0|^12.0",
-    "illuminate/support": "^8.12|^9.0|^10.0|^11.0|^12.0"
-},
-"require-dev": {
-    "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0|^10.0",
-    "phpunit/phpunit": "^9.4|^10.1|^11.5.3"
-},
+  "require": {
+    "php": "^8.2",
+    "illuminate/config": "^11.0|^12.0|^13.0",
+    "illuminate/support": "^11.0|^12.0|^13.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9.0|^10.0|^11.0",
+    "phpunit/phpunit": "^10.5|^11.0|^12.0"
+  },
   "autoload": {
     "psr-4": {
       "F9Web\\Meta\\": "src"
