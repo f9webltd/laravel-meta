@@ -1,16 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace F9Web\Meta\Tests;
+
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class BladeDirectiveTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider bladeDataProvider
-     * @param  string  $expected
-     * @param  string  $directive
-     */
-    public function it_compiles_without_arguments(string $expected, string $directive)
+    #[DataProvider('bladeDataProvider')]
+    public function test_it_compiles_without_arguments(string $expected, string $directive)
     {
         $compiled = $this->app['blade.compiler']->compileString($directive);
 
